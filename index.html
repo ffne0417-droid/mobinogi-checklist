@@ -1,0 +1,3309 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마비노기 숙제표</title>
+    <style>
+        /* =========================================
+           [스타일 시트] 독립형 CSS
+           ========================================= */
+        :root {
+            --primary: #4f46e5;
+            /* 보라 */
+            --primary-bg: #eef2ff;
+            --secondary: #10b981;
+            /* 초록 */
+            --bg-color: #f3f4f6;
+            --white: #ffffff;
+            --border: #e5e7eb;
+            --text-main: #111827;
+            --text-sub: #6b7280;
+            --header-h: 70px;
+            --tabs-h: 54px;
+        }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-main);
+            padding-top: 0;
+            padding-bottom: 120px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-height: 90vh;
+        }
+
+        /* 헤더 */
+        .header {
+            background-color: var(--primary);
+            color: white;
+            height: var(--header-h);
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-left: 12px;
+            display: inline-block;
+        }
+
+        .reset-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .reset-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 탭 */
+        .tabs {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            height: var(--tabs-h);
+            position: sticky;
+            top: var(--header-h);
+            z-index: 900;
+            box-sizing: border-box;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+            border: none;
+            background: none;
+            font-weight: bold;
+            color: var(--text-sub);
+            cursor: pointer;
+            border-bottom: 4px solid transparent;
+            font-size: 0.95rem;
+            line-height: var(--tabs-h);
+            padding: 0 10px;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background-color: var(--primary-bg);
+        }
+
+        /* 섹션 */
+        .section {
+            display: none;
+            padding-bottom: 40px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-header {
+            padding: 16px 24px;
+            background-color: #f9fafb;
+            border-bottom: 1px solid var(--border);
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-header::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: 0.3s;
+            margin-left: 10px;
+        }
+
+        .section-header.collapsed::after {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            transition: max-height 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        .section-header.collapsed+.section-content {
+            display: none;
+        }
+
+        /* 메뉴 설정 영역 */
+        .menu-config-area {
+            padding: 20px;
+            background-color: #fffbeb;
+            border-bottom: 1px solid #fcd34d;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .menu-group-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #b45309;
+            text-transform: uppercase;
+        }
+
+        .add-menu-btn {
+            background-color: #f59e0b;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .add-menu-btn:hover {
+            background-color: #d97706;
+        }
+
+        .toggle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px;
+        }
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-item.active {
+            border-color: #f59e0b;
+            background-color: #fff7ed;
+        }
+
+        .toggle-switch {
+            width: 32px;
+            height: 18px;
+            background-color: #d1d5db;
+            border-radius: 20px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .toggle-item.active .toggle-switch {
+            background-color: #f59e0b;
+        }
+
+        .toggle-dot {
+            width: 14px;
+            height: 14px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: 0.3s;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-item.active .toggle-dot {
+            left: 16px;
+        }
+
+        .edit-menu-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 2px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            display: none;
+            /* Hide by default, will show in manager */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+
+        .toggle-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #374151;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+        }
+
+        .row-actions {
+            display: flex;
+            gap: 8px;
+            opacity: 0.2;
+            /* 상시 노출로 변경 (낮은 투명도) */
+            transition: 0.2s;
+            margin-left: auto;
+            pointer-events: auto;
+            z-index: 100;
+        }
+
+        tr:hover .row-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 6px;
+            border-radius: 6px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-edit {
+            color: #4f46e5;
+        }
+
+        .btn-edit:hover {
+            background-color: #eef2ff;
+            border-color: #4f46e5;
+        }
+
+        .drag-handle {
+            cursor: grab;
+            color: #d1d5db;
+            padding: 0 8px 0 4px;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        tr.dragging {
+            opacity: 0.5;
+            background-color: #f1f5f9;
+        }
+
+        tr.drag-over {
+            border-top: 2px solid var(--primary);
+        }
+
+        .add-row-btn,
+        .del-row-btn {
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 6px;
+        }
+
+        .add-row-btn {
+            background-color: #4f46e5;
+        }
+
+        .add-row-btn:hover {
+            background-color: #3730a3;
+        }
+
+        .del-row-btn {
+            background-color: #ef4444;
+        }
+
+        .del-row-btn:hover {
+            background-color: #dc2626;
+        }
+
+        /* 매니저 모달 리스트 */
+        .manage-list {
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .manage-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .manage-item-info {
+            font-size: 0.85rem;
+        }
+
+        .manage-item-info b {
+            color: #111827;
+        }
+
+        .manage-item-info span {
+            color: #6b7280;
+            display: block;
+            font-size: 0.75rem;
+        }
+
+        .btn-mini-del {
+            background-color: #fee2e2;
+            color: #ef4444;
+            border: 1px solid #fecaca;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-mini-del:hover {
+            background-color: #fca5a5;
+            color: white;
+        }
+
+        .npc-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .npc-info {
+            flex-grow: 1;
+        }
+
+        /* 준비 카드 그리드 */
+        .special-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            padding: 20px;
+        }
+
+        .char-divider {
+            padding: 8px 24px;
+            background-color: #f3f4f6;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #4b5563;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            margin-top: 0;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            position: relative;
+        }
+
+        .card-actions {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            display: none;
+            gap: 4px;
+        }
+
+        .card:hover .card-actions {
+            display: flex;
+        }
+
+        .card-action-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 2px 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .card-action-btn:hover {
+            background: #f3f4f6;
+            border-color: var(--primary);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .card.checked {
+            background-color: #f0fdf4;
+            border-color: var(--secondary);
+        }
+
+        .card-content h3 {
+            margin: 0 0 4px 0;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .card-content p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+
+        .prep-check-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #d1d5db;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.2s;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+
+        .card.checked .prep-check-circle {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .card.checked .prep-check-circle::after {
+            content: '✓';
+        }
+
+        /* 메모장 */
+        .memo-box {
+            margin: 20px;
+            padding: 16px;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        .memo-label {
+            font-weight: 800;
+            color: #4b5563;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .memo-textarea {
+            width: 100%;
+            height: 120px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.9rem;
+            resize: vertical;
+            background-color: white;
+            box-sizing: border-box;
+        }
+
+        .memo-textarea:focus {
+            outline: 2px solid var(--primary);
+            border-color: transparent;
+        }
+
+        /* 테이블 */
+        .table-wrap {
+            overflow-x: auto;
+            max-height: calc(100vh - 200px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+            table-layout: fixed;
+        }
+
+        th {
+            background-color: #f9fafb;
+            color: var(--text-sub);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 800;
+            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        th:first-child {
+            text-align: left;
+            padding-left: 24px;
+            width: 40%;
+            z-index: 850;
+        }
+
+        td:first-child {
+            text-align: left;
+            padding-left: 24px;
+            width: 40%;
+            border-right: 1px solid #f3f4f6;
+            position: sticky;
+            left: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        th:not(:first-child),
+        td:not(:first-child) {
+            width: 12%;
+        }
+
+        .village-row td {
+            background-color: #f1f5f9;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            padding: 8px 24px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: middle;
+        }
+
+        .npc-name {
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .item-desc {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            line-height: 1.4;
+            word-break: keep-all;
+        }
+
+        .name-input {
+            width: 100%;
+            border: 1px solid transparent;
+            background: transparent;
+            text-align: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .name-input:hover,
+        .name-input:focus {
+            background: white;
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .role-select {
+            display: block;
+            margin-top: 4px;
+            font-size: 0.75rem;
+            padding: 2px 4px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            color: #4b5563;
+            background-color: #f9fafb;
+            width: 100%;
+            max-width: 120px;
+        }
+
+        .check-cell {
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .check-cell:hover {
+            background-color: #f9fafb;
+        }
+
+        .check-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .check-cell.checked .check-box {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .check-cell.checked .check-box::after {
+            content: '✓';
+        }
+
+        /* 모달 (팝업) 스타일 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 550px;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: modalIn 0.2s ease-out;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9fafb;
+        }
+
+        .modal-title {
+            font-weight: 800;
+            color: #111827;
+            font-size: 1.1rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        /* 폼 그리드 (Row Layout) */
+        .form-row-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        .form-row-2-3-1 {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 8px;
+        }
+
+        /* 재료 추가 CSS */
+        .ing-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .ing-name {
+            flex: 2;
+            min-width: 80px;
+        }
+
+        .ing-qty {
+            width: 50px;
+            text-align: center;
+        }
+
+        .ing-type {
+            width: 65px;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .ing-village {
+            width: 90px;
+        }
+
+        .ing-npc {
+            width: 70px;
+        }
+
+        .ing-row input,
+        .ing-row select {
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .ing-btn-del {
+            color: #ef4444;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 4px;
+        }
+
+        .add-ing-btn {
+            background-color: #f3f4f6;
+            color: #4b5563;
+            border: 1px dashed #d1d5db;
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .add-ing-btn:hover {
+            background-color: #e5e7eb;
+        }
+
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            background: #f9fafb;
+        }
+
+        .btn-cancel {
+            padding: 8px 16px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .btn-submit {
+            padding: 8px 16px;
+            border: none;
+            background: #4f46e5;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 600px) {
+            :root {
+                --header-h: 100px;
+                --tabs-h: 50px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 8px;
+                padding: 16px;
+            }
+
+            .reset-btn {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+
+            th {
+                font-size: 0.7rem;
+                padding: 8px 4px;
+            }
+
+            .name-input {
+                font-size: 0.75rem;
+            }
+
+            th:first-child,
+            td:first-child {
+                width: 45%;
+                padding-left: 12px;
+            }
+
+            td:not(:first-child) {
+                width: 11%;
+            }
+
+            .ing-row {
+                gap: 4px;
+            }
+
+            .form-row-4 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* 모바일에선 2x2 */
+        }
+
+        /* 담당 설정 버튼 및 팝업 스타일 */
+        .role-btn {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            color: #4f46e5;
+            background-color: #f5f3ff;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .role-btn:hover {
+            background-color: #ede9fe;
+            border-color: #4f46e5;
+        }
+
+        .role-popup {
+            position: absolute;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 3000;
+            padding: 8px;
+            display: none;
+            min-width: 120px;
+        }
+
+        .role-popup.show {
+            display: block;
+        }
+
+        .role-option {
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px;
+        }
+
+        .role-option:hover {
+            background-color: #f3f4f6;
+        }
+
+        .role-option input {
+            margin: 0;
+        }
+
+        /* Shake animation for validation errors */
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-10px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>📅 마비노기 숙제표</h1>
+                <p>메뉴 설정 → 요리 → 구매 → 교환</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <button class="reset-btn" style="background-color:#4b5563;" onclick="openCharManager()">👥 캐릭터
+                    설정</button>
+                <button class="reset-btn" onclick="resetAll()">🗑️ 초기화</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showSection('special', this)">⭐ 준비&메뉴</button>
+            <button class="tab-btn" onclick="showSection('cooking', this)">🍳 요리제작</button>
+            <button class="tab-btn" onclick="showSection('shopping', this)">🛍️ 주간구매</button>
+            <button class="tab-btn" onclick="showSection('weekly', this)">📦 주간교환</button>
+            <button class="tab-btn" onclick="showSection('daily', this)">🔄 일일교환</button>
+        </div>
+
+        <!-- 0. 준비 & 메뉴 -->
+        <div id="special" class="section sec-special active">
+            <div class="menu-config-area">
+                <div class="menu-header" style="justify-content: space-between; align-items:center;">
+                    <div class="menu-group-title" style="margin:0;">☀️ DAILY & 🗓️ WEEKLY 메뉴</div>
+                    <button class="btn-mini-del"
+                        style="background:#e5e7eb; color:#374151; padding:2px 6px; font-size:0.75rem; border:1px solid #d1d5db;"
+                        onclick="openMenuManager()">⚙️ 관리</button>
+                </div>
+                <div class="menu-group-title" style="margin-bottom:8px; opacity:0.6; font-size:0.7rem;">☀️ DAILY</div>
+                <div class="toggle-grid" id="menu-toggles-daily"></div>
+                <div style="height:16px;"></div>
+                <div class="menu-group-title" style="margin-bottom:8px; opacity:0.6; font-size:0.7rem; color: #4f46e5;">
+                    🗓️ WEEKLY</div>
+                <div class="toggle-grid" id="menu-toggles-weekly"></div>
+            </div>
+
+            <div class="section-header" onclick="toggleSection(this)">
+                🥪 공통 준비물
+                <button class="add-menu-btn" style="background-color:#4b5563;"
+                    onclick="event.stopPropagation(); openCommonPrepModal()">➕
+                    추가</button>
+            </div>
+            <div class="section-content">
+                <div id="common-prep-area" class="special-grid" style="padding: 10px 20px;"></div>
+            </div>
+
+            <div class="section-header" onclick="toggleSection(this)">👑 추가 준비물 (메뉴/담당 연동)</div>
+            <div class="section-content">
+                <div id="dynamic-prep-area"></div>
+            </div>
+
+            <div class="section-header" onclick="toggleSection(this)">📝 메모장</div>
+            <div class="section-content">
+                <div class="memo-box">
+                    <label class="memo-label">📝 준비물 메모 (자동 저장)</label>
+                    <textarea id="tab-memo" class="memo-textarea" placeholder="여기에 필요한 내용을 메모하세요..."
+                        oninput="saveTabMemo(this.value)"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. 요리 제작 -->
+        <div id="cooking" class="section sec-cooking">
+            <div class="section-header">🍳 요리 제작 & 담당 설정</div>
+            <div class="table-wrap">
+                <table id="table-cooking">
+                    <tbody id="body-cooking"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2. 주간 구매 -->
+        <div id="shopping" class="section sec-shop">
+            <div class="section-header">
+                🛍️ 주간 상점 구매
+                <span></span>
+            </div>
+            <div class="table-wrap">
+                <table id="table-shopping">
+                    <tbody id="body-shopping"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3. 주간 교환 -->
+        <div id="weekly" class="section sec-week">
+            <div class="section-header">
+                📦 주간 물물교환
+                <span></span>
+            </div>
+            <div class="table-wrap">
+                <table id="table-weekly">
+                    <tbody id="body-weekly"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 4. 일일 교환 -->
+        <div id="daily" class="section sec-day">
+            <div class="section-header">
+                🔄 일일 물물교환
+                <span></span>
+            </div>
+            <div class="table-wrap">
+                <table id="table-daily">
+                    <tbody id="body-daily"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모달 창 -->
+    <div id="add-modal" class="modal-overlay" style="z-index: 2100;">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title">➕ 새 메뉴 추가</div>
+                <input type="hidden" id="edit-tag-id" value="">
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <!-- 1. 메뉴 기본 정보 -->
+                <div class="form-group">
+                    <label class="form-label">메뉴 이름 (필수)</label>
+                    <input type="text" id="add-menu-name" class="form-input" placeholder="예: 양털깎기">
+                </div>
+
+                <!-- 한 행에 배치: 교환주기 | 누구에게 | 마을 | 줄 개수 -->
+                <div class="form-row-4 form-group">
+                    <div>
+                        <label class="form-label">교환 주기</label>
+                        <select id="add-cycle" class="form-select">
+                            <option value="weekly">주간 교환</option>
+                            <option value="daily">일일 교환</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">누구에게</label>
+                        <input type="text" id="add-npc" class="form-input" placeholder="NPC">
+                    </div>
+                    <div>
+                        <label class="form-label">마을</label>
+                        <select id="add-village" class="form-select">
+                            <option value="이멘마하">이멘마하</option>
+                            <option value="반호르">반호르</option>
+                            <option value="던바튼">던바튼</option>
+                            <option value="티르코네일">티르코네일</option>
+                            <option value="콜헨">콜헨</option>
+                            <option value="두갈드아일">두갈드아일</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">줄 개수</label>
+                        <input type="text" id="add-give-qty" class="form-input" placeholder="0">
+                    </div>
+                </div>
+
+                <!-- 한 행에 배치: 받을 보상 | 받는 개수 -->
+                <div class="form-row-2-3-1 form-group">
+                    <div>
+                        <label class="form-label">받을 보상 (아이템명)</label>
+                        <input type="text" id="add-reward" class="form-input" placeholder="예: 최고급 가죽">
+                    </div>
+                    <div>
+                        <label class="form-label">개수</label>
+                        <input type="text" id="add-reward-qty" class="form-input" placeholder="1">
+                    </div>
+                </div>
+
+                <!-- 2. 재료 입력 -->
+                <div style="border-top:1px dashed #e5e7eb; margin:16px 0; padding-top:16px;">
+                    <label class="form-label">🥘 재료 추가 (레시피)</label>
+                    <p style="font-size:0.75rem; color:#6b7280; margin-bottom:8px;">* 동일한 메뉴 이름으로 이미 저장된 항목이 있다면 해당 재료들이
+                        합산되어 표시됩니다.</p>
+
+                    <div id="ing-list"></div>
+                    <button type="button" class="add-ing-btn" onclick="addIngRow()">+ 재료 한 줄 추가</button>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">취소</button>
+                <button class="btn-submit" onclick="addItem()">저장하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 준비물 편집 모달 -->
+    <div id="prep-modal" class="modal-overlay">
+        <div class="modal" style="max-width:350px;">
+            <div class="modal-header">
+                <div class="modal-title">📦 준비물 편집</div>
+                <button class="close-btn" onclick="closePrepModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-prep-id">
+                <input type="hidden" id="edit-prep-type">
+                <div class="form-group" id="prep-title-group">
+                    <label class="form-label">준비물 제목</label>
+                    <input type="text" id="prep-title" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">설명</label>
+                    <input type="text" id="prep-desc" class="form-input">
+                </div>
+                <div class="form-group" id="prep-icon-group">
+                    <label class="form-label">아이콘 보정</label>
+                    <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px;" id="icon-picker">
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('📜')">📜</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🌿')">🌿</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🔨')">🔨</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🛒')">🛒</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('📜')">📜</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🛠️')">🛠️</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('📦')">📦</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🛒')">🛒</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🔨')">🔨</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('✂️')">✂️</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🧶')">🧶</button>
+
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🌿')">🌿</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍃')">🍃</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🪵')">🪵</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥬')">🥬</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥕')">🥕</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🧅')">🧅</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🧄')">🧄</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥔')">🥔</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍠')">🍠</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🫚')">🫚</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥦')">🥦</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🌽')">🌽</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍄')">🍄</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥜')">🥜</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🌰')">🌰</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥑')">🥑</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🎃')">🎃</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🌶️')">🌶️</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍓')">🍓</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍎')">🍎</button>
+
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍖')">🍖</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥩')">🥩</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍗')">🍗</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥓')">🥓</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥚')">🥚</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🐟')">🐟</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🎣')">🎣</button>
+
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍞')">🍞</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🧀')">🧀</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🥛')">🥛</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🧁')">🧁</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍺')">🍺</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍷')">🍷</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍚')">🍚</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🍛')">🍛</button>
+
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🧂')">🧂</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🏺')">🏺</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('💎')">💎</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🪙')">🪙</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🗝️')">🗝️</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🩹')">🩹</button>
+                        <button type="button" class="action-btn" style="padding:4px; font-size:1rem;"
+                            onclick="setPrepIcon('🧵')">🧵</button>
+                    </div>
+                </div>
+                <div class="form-group" id="prep-color-group">
+                    <label class="form-label">항목 색상 (HEX)</label>
+                    <input type="color" id="prep-color" class="form-input" style="height:40px; padding:2px;">
+                    <div style="display:flex; flex-wrap:nowrap; gap:3px; margin-top:8px;">
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#ef4444; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#ef4444'" title="빨강"></button>
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#f97316; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#f97316'" title="주황"></button>
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#f59e0b; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#f59e0b'" title="황금"></button>
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#15803d; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#15803d'" title="초록"></button>
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#3b82f6; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#3b82f6'" title="파랑"></button>
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#8b5cf6; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#8b5cf6'" title="보라"></button>
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#ec4899; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#ec4899'" title="핑크"></button>
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#b45309; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#b45309'" title="갈색"></button>
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#6b7280; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#6b7280'" title="회색"></button>
+                        <button type="button" class="action-btn"
+                            style="padding:2px; width:24px; height:24px; min-width:24px; background:#374151; border:2px solid #ddd;"
+                            onclick="document.getElementById('prep-color').value='#374151'" title="진회색"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" id="prep-modal-footer">
+                <button class="btn-cancel" id="prep-del-btn" onclick="deletePrepItem()">삭제</button>
+                <div style="flex-grow:1;"></div>
+                <button class="btn-submit" onclick="savePrepEdit()">수정완료</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 개별 항목 추가/수정 모달 -->
+    <div id="single-modal" class="modal-overlay" style="z-index: 2100;">
+        <div class="modal" style="max-width:400px;">
+            <div class="modal-header">
+                <div class="modal-title" id="single-modal-title">📦 항목 편집</div>
+                <button class="close-btn" onclick="closeSingleModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-type">
+                <input type="hidden" id="edit-group-village">
+                <input type="hidden" id="edit-row-idx">
+
+                <div class="form-group">
+                    <label class="form-label">마을</label>
+                    <select id="single-village" class="form-select">
+                        <option value="이멘마하">이멘마하</option>
+                        <option value="반호르">반호르</option>
+                        <option value="던바튼">던바튼</option>
+                        <option value="티르코네일">티르코네일</option>
+                        <option value="콜헨">콜헨</option>
+                        <option value="두갈드아일">두갈드아일</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">NPC 이름</label>
+                    <input type="text" id="single-npc" class="form-input" placeholder="NPC 이름">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">상세 내용</label>
+                    <textarea id="single-item" class="form-input" style="height:80px;"
+                        placeholder="상세 내용을 입력하세요..."></textarea>
+
+                    <div id="exchange-edit-group" style="display:none;">
+                        <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;">
+                            <input type="text" id="ex-give-item" class="form-input" placeholder="줄 물건">
+                            <input type="number" id="ex-give-qty" class="form-input" style="width:60px;" placeholder="개"
+                                min="0">
+                        </div>
+                        <div style="display:flex; align-items:center; gap:5px;">
+                            <input type="text" id="ex-get-item" class="form-input" placeholder="받을 물건">
+                            <input type="number" id="ex-get-qty" class="form-input" style="width:60px;" placeholder="개"
+                                min="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeSingleModal()">취소</button>
+                <div style="flex:1;"></div>
+                <button class="btn-submit" style="background-color:#ef4444; margin-right:10px;"
+                    onclick="deleteCurrentItem()">삭제</button>
+                <button class="btn-submit" onclick="saveSingleItem()">저장하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 확인 모달 (Custom Confirm) -->
+    <div id="confirm-modal" class="modal-overlay" style="z-index: 2200;">
+        <div class="modal" style="max-width:300px;">
+            <div class="modal-body" style="text-align:center; padding:30px 20px;">
+                <p id="confirm-msg" style="font-weight:bold;"></p>
+            </div>
+            <div class="modal-footer" style="justify-content: center; gap:10px; padding-bottom: 20px;">
+                <button class="btn-cancel" onclick="closeConfirmModal()"
+                    style="padding: 8px 16px; border: 1px solid #d1d5db; background: white; border-radius: 6px; cursor: pointer;">취소</button>
+                <button class="btn-submit" id="confirm-ok-btn"
+                    style="background-color:#ef4444; color:white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer;">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 통합 관리 모달 (주간구매/교환/일일교환) -->
+    <div id="manager-modal" class="modal-overlay">
+        <div class="modal" style="max-width:400px;">
+            <div class="modal-header">
+                <div class="modal-title" id="manager-modal-title">항목 관리</div>
+                <button class="add-menu-btn" style="margin-left:auto; margin-right:8px;"
+                    onclick="openSingleModal(document.getElementById('manage-type').value)">➕ 추가</button>
+                <button class="close-btn" onclick="closeManagerModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="manage-type">
+                <div id="manage-list" class="manage-list"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeManagerModal()">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 캐릭터 관리 모달 -->
+    <div id="char-modal" class="modal-overlay">
+        <div class="modal" style="max-width:400px;">
+            <div class="modal-header">
+                <div class="modal-title">👥 캐릭터 관리</div>
+                <button class="close-btn"
+                    onclick="document.getElementById('char-modal').classList.remove('open')">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="char-list" class="manage-list"></div>
+                <div style="display:flex; gap:5px; margin-top:10px; border-top:1px solid #eee; padding-top:10px;">
+                    <input type="text" id="new-char-name" class="form-input" placeholder="새 캐릭터 이름">
+                    <button class="btn-submit" style="width:80px;" onclick="addChar()">추가</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel"
+                    onclick="document.getElementById('char-modal').classList.remove('open')">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 메뉴 관리 전용 모달 -->
+    <div id="menu-manager-modal" class="modal-overlay">
+        <div class="modal" style="max-width:400px;">
+            <div class="modal-header">
+                <div class="modal-title">📋 메뉴 관리</div>
+                <button class="add-menu-btn" style="margin-left:auto; margin-right:8px;" onclick="openModal()">➕
+                    추가</button>
+                <button class="close-btn" onclick="closeMenuManager()">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="menu-manage-list" class="manage-list"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeMenuManager()">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // const defaultNicknames = { 'main': '말랑말랑커피', 'sub1': '새콤달콤유기농커피', 'sub2': 'MNe', 'sub3': '프린스', 'sub4': '별의바다' };
+        let charKeys = []; // 동적 로드됨
+
+        const initialData = {
+            version: 9,
+            menus: [
+                { id: 'apple_cake', label: '사과케이크 (일일)', npc: '제이미', village: '던바튼', cycle: 'daily', giveQty: 7, reward: '상급 옷감+', rewardQty: '28' },
+                { id: 'steak', label: '스테이크 (일일)', npc: '제롬', village: '던바튼', cycle: 'daily', giveQty: 7, reward: '상급 실크', rewardQty: '28' },
+                { id: 'veggie', label: '야채볶음 (일일)', npc: '앨빈', village: '두갈드아일', cycle: 'daily', giveQty: 70, reward: '상급 목재', rewardQty: '56x5' },
+                { id: 'pumpkin', label: '호박스프 (주간)', npc: '델렌', village: '이멘마하', cycle: 'weekly', giveQty: 5, reward: '최상급가죽+, 최상급목재+,데코레어3', rewardQty: '' },
+                { id: 'curry', label: '카레라이스 (주간)', npc: '오슬라', village: '이멘마하', cycle: 'weekly', giveQty: 4, reward: '운철괴', rewardQty: '2' },
+                { id: 'fish', label: '농어매운탕 (주간)', npc: '아이데른', village: '반호르', cycle: 'weekly', giveQty: 5, reward: '은합금괴', rewardQty: '10' },
+                { id: 'green_cake', label: '녹차케이크 (주간)', npc: '델렌', village: '이멘마하', cycle: 'weekly', giveQty: 10, reward: '데코 엘리트', rewardQty: '15' }
+            ],
+            characters: [
+                { id: 'main', name: '캐릭터1' },
+                { id: 'sub1', name: '캐릭터2' },
+                { id: 'sub2', name: '캐릭터3' }
+            ],
+            cooking: [
+                {
+                    village: '요리 목록', items: [
+                        { id: 'c_1768934104620', npc: '스테이크 (7개)', item: '고기 70, 생크림 14, 마늘 14, 후추 21', tag: 'steak', defaultRole: ['each'] },
+                        { id: 'c_1768934182600', npc: '야채볶음 (70개)', item: '감자 560, 양파 210, 양배추 420, 허브 140', tag: 'veggie', defaultRole: ['each'] },
+                        { id: 'c_1768934220650', npc: '호박스프 (5개)', item: '호박 50, 감자 30, 양파 30, 생강 10, 생크림 25', tag: 'pumpkin', defaultRole: ['each'] },
+                        { id: 'c_1768934251505', npc: '카레라이스 (4개)', item: '밥 12, 고기 40, 당근 12, 감자 32, 카레가루 8', tag: 'curry', defaultRole: ['each'] },
+                        { id: 'c_1768934266242', npc: '농어매운탕 (5개)', item: '농어 30, 무 20, 고춧가루 20, 후추 10, 양파 30', tag: 'fish', defaultRole: ['each'] },
+                        { id: 'c_1768934319973', npc: '녹차케이크 (10개)', item: '찻잎 100, 딸기 60, 생크림 60, 밀가루 40, 설탕 60', tag: 'green_cake', defaultRole: ['each'] },
+                        { id: 'c_1768934328313', npc: '사과케이크 (7개)', item: '사과 84, 설탕 63, 밀가루 28, 생크림 14', tag: 'apple_cake', defaultRole: ['each'] }
+                    ]
+                }
+            ],
+            shopping: [
+                { village: '이멘마하', items: [{ npc: '프레이저', item: '생크림, 설탕, 밀가루, 카레가루, 후추' }, { npc: '고든', item: '고기, 생강, 당근, 마늘' }] },
+                { village: '반호르', items: [{ npc: '제니퍼', item: '고기(보충용)' }] },
+                { village: '던바튼', items: [{ npc: '마누스', item: '버섯진액 3종' }, { npc: '글리니스', item: '사과, 후추(보충)' }] },
+                { village: '티르코네일', items: [{ npc: '말콤', item: '생가죽, 옷감' }, { npc: '케이틴', item: '사과, 설탕' }] }
+            ],
+            weekly: [
+                { village: '이멘마하', items: [{ npc: '고든', item: '쌀 150개 → 밀가루 50개' }, { npc: '델렌', item: '녹차케이크 2개 → 데코 엘리트 3개' }, { npc: '델렌', item: '호박스프 5개 → 가죽+/목재+/데코 개' }, { npc: '오슬라', item: '카레라이스 4개 → 운철괴 2개' }] },
+                { village: '두갈드아일', items: [] },
+                { village: '반호르', items: [{ npc: '아이데른', item: '농어매운탕 1개 → 은합금괴 10개' }] }
+            ],
+            daily: [
+                { village: '던바튼', items: [{ npc: '제롬', item: '크림소스 스테이크 1개 → 상급실크 4개' }, { npc: '제이미', item: '사과케이크 1개 → 상급옷감+ 4개' }] },
+                { village: '두갈드아일', items: [{ npc: '앨빈', item: '야채볶음 2개 → 상급목재 8개' }] }
+            ],
+            customPrep: [
+                { id: 'steak_고기_1768934104620', type: 'base', owner: 'main', title: '🥩 고기 70개 구매', desc: '카레라이스용', color: '#9c2121', tag: 'steak', village: '반호르', npc: '제니퍼' },
+                { id: 'steak_생크림_1768934104620', type: 'base', owner: 'main', title: '🥛 생크림 14개 구매', desc: '스테이크용', color: '#6b7280', tag: 'steak', village: '이멘마하', npc: '프레이저' },
+                { id: 'steak_마늘_1768934104620', type: 'base', owner: 'main', title: '🧄 마늘 14개 구매', desc: '스테이크용', color: '#af853c', tag: 'steak', village: '이멘마하', npc: '고든' },
+                { id: 'steak_후추_1768934104620', type: 'base', owner: 'main', title: '🧂 후추 21개 구매', desc: '스테이크용', color: '#6b7280', tag: 'steak', village: '던바튼', npc: '글리니스' },
+                { id: 'veggie_감자_1768934182600', type: 'base', owner: 'main', title: '🥔 감자 560개 채집', desc: '카레라이스용', color: '#b45309', tag: 'veggie', village: '', npc: '' },
+                { id: 'veggie_양파_1768934182600', type: 'base', owner: 'main', title: '🧅 양파 210개 채집', desc: '야채볶음용', color: '#ba8d40', tag: 'veggie', village: '', npc: '' },
+                { id: 'veggie_양배추_1768934182600', type: 'base', owner: 'main', title: '🥬 양배추 420개 채집', desc: '야채볶음용', color: '#24c660', tag: 'veggie', village: '', npc: '' },
+                { id: 'veggie_허브_1768934182600', type: 'base', owner: 'main', title: '🌿 허브 140개 채집', desc: '야채볶음용', color: '#15803d', tag: 'veggie', village: '', npc: '' },
+                { id: 'pumpkin_호박_1768934220650', type: 'base', owner: 'main', title: '🎃 호박 50개 채집', desc: '호박스프용', color: '#f97316', tag: 'pumpkin', village: '', npc: '' },
+                { id: 'pumpkin_감자_1768934220650', type: 'base', owner: 'main', title: '🥔 감자 30개 채집', desc: '카레라이스용', color: '#b45309', tag: 'pumpkin', village: '', npc: '' },
+                { id: 'pumpkin_양파_1768934220650', type: 'base', owner: 'main', title: '🧅 양파 30개 채집', desc: '야채볶음용', color: '#ba8d40', tag: 'pumpkin', village: '', npc: '' },
+                { id: 'pumpkin_생강_1768934220650', type: 'base', owner: 'main', title: '🫚 생강 10개 구매', desc: '호박스프용', color: '#b88d42', tag: 'pumpkin', village: '이멘마하', npc: '고든' },
+                { id: 'pumpkin_생크림_1768934220650', type: 'base', owner: 'main', title: '🥛 생크림 25개 구매', desc: '스테이크용', color: '#6b7280', tag: 'pumpkin', village: '이멘마하', npc: '프레이저' },
+                { id: 'curry_밥_1768934251505', type: 'base', owner: 'main', title: '🍚 밥 12개 제작', desc: '카레라이스용', color: '#6b7280', tag: 'curry', village: '', npc: '' },
+                { id: 'curry_고기_1768934251505', type: 'base', owner: 'main', title: '🥩 고기 40개 구매', desc: '카레라이스용', color: '#9c2121', tag: 'curry', village: '반호르', npc: '제니퍼' },
+                { id: 'curry_당근_1768934251505', type: 'base', owner: 'main', title: '🥕 당근 12개 구매', desc: '카레라이스용', color: '#ef4444', tag: 'curry', village: '이멘마하', npc: '고든' },
+                { id: 'curry_감자_1768934251505', type: 'base', owner: 'main', title: '🥔 감자 32개 채집', desc: '카레라이스용', color: '#b45309', tag: 'curry', village: '', npc: '' },
+                { id: 'curry_카레가루_1768934251505', type: 'base', owner: 'main', title: '📦 카레가루 8개 구매', desc: '카레라이스용', color: '#f59e0b', tag: 'curry', village: '이멘마하', npc: '프레이저' },
+                { id: 'fish_농어_1768934266242', type: 'base', owner: 'main', title: '🎣 농어 30개 낚시', desc: '농어매운탕용', color: '#3b82f6', tag: 'fish', village: '', npc: '' },
+                { id: 'fish_무_1768934266242', type: 'base', owner: 'main', title: '🥦 무 20개 구매', desc: '농어매운탕용', color: '#8dceb5', tag: 'fish', village: '이멘마하', npc: '고든' },
+                { id: 'fish_고춧가루_1768934266242', type: 'base', owner: 'main', title: '🌶️ 고춧가루 20개 구매', desc: '농어매운탕용', color: '#ef4444', tag: 'fish', village: '이멘마하', npc: '프레이저' },
+                { id: 'fish_후추_1768934266242', type: 'base', owner: 'main', title: '🧂 후추 10개 구매', desc: '스테이크용', color: '#6b7280', tag: 'fish', village: '던바튼', npc: '글리니스' },
+                { id: 'fish_양파_1768934266242', type: 'base', owner: 'main', title: '🧅 양파 30개 채집', desc: '야채볶음용', color: '#ba8d40', tag: 'fish', village: '이멘마하', npc: '' },
+                { id: 'green_cake_찻잎_1768934319973', type: 'base', owner: 'main', title: '🌿 찻잎 100개 채집', desc: '녹차케이크용', color: '#15803d', tag: 'green_cake', village: '', npc: '' },
+                { id: 'green_cake_딸기_1768934319973', type: 'base', owner: 'main', title: '🍓 딸기 60개 구매', desc: '녹차케이크용', color: '#ef4444', tag: 'green_cake', village: '콜헨', npc: '코너' },
+                { id: 'green_cake_생크림_1768934319973', type: 'base', owner: 'main', title: '🥛 생크림 60개 구매', desc: '스테이크용', color: '#6b7280', tag: 'green_cake', village: '이멘마하', npc: '프레이저' },
+                { id: 'green_cake_밀가루_1768934319973', type: 'base', owner: 'main', title: '📦 밀가루 40개 구매', desc: '녹차케이크용', color: '#6b7280', tag: 'green_cake', village: '이멘마하', npc: '프레이저' },
+                { id: 'green_cake_설탕_1768934319973', type: 'base', owner: 'main', title: '🧂 설탕 60개 구매', desc: '사과케이크용', color: '#6b7280', tag: 'green_cake', village: '티르코네일', npc: '케이틴' },
+                { id: 'apple_cake_사과_1768934328313', type: 'base', owner: 'main', title: '🍎 사과 84개 구매', desc: '사과케이크용', color: '#ef4444', tag: 'apple_cake', village: '티르코네일', npc: '케이틴' },
+                { id: 'apple_cake_설탕_1768934328313', type: 'base', owner: 'main', title: '🧂 설탕 63개 구매', desc: '사과케이크용', color: '#6b7280', tag: 'apple_cake', village: '티르코네일', npc: '케이틴' },
+                { id: 'apple_cake_밀가루_1768934328313', type: 'base', owner: 'main', title: '📦 밀가루 28개 구매', desc: '녹차케이크용', color: '#6b7280', tag: 'apple_cake', village: '이멘마하', npc: '프레이저' },
+                { id: 'apple_cake_생크림_1768934328313', type: 'base', owner: 'main', title: '🥛 생크림 14개 구매', desc: '스테이크용', color: '#6b7280', tag: 'apple_cake', village: '이멘마하', npc: '프레이저' }
+            ],
+            commonPrep: [
+                { id: 'common_quest', title: '📜 채집 임무 구매', desc: '생활력 업업! (상점)', color: '#b45309' }
+            ]
+        };
+
+        const prepItemsDef = [
+            { id: 'pepper', type: 'base', title: '🧂 후추 {qty}개 구매', desc: '매운탕/스테이크용', color: '#b91c1c', icon: '🧂', baseName: '후추' },
+            { id: 'chili', type: 'base', title: '🌶️ 고춧가루 {qty}개 구매', desc: '매운탕용 (글리니스)', color: '#b91c1c', icon: '🌶️', baseName: '고춧가루' },
+            { id: 'apple', type: 'base', title: '🍎 사과 {qty}개 채집', desc: '사과케익용', color: '#ef4444', icon: '🍎', baseName: '사과' },
+            { id: 'meat', type: 'base', title: '🍖 고기 {qty}개 구매', desc: '스테이크/카레', color: '#b91c1c', icon: '🍖', baseName: '고기' },
+            { id: 'rice', type: 'base', title: '🍚 밥 {qty}개 제작', desc: '쌀 채집 병행 (카레용)', color: '#4f46e5', icon: '🍚', baseName: '밥' },
+            { id: 'potato', type: 'base', title: '🥔 감자 {qty}개 채집', desc: '직접 채집 항목', color: '#374151', icon: '🥔', baseName: '감자' },
+            { id: 'sugar', type: 'base', title: '🧂 설탕 {qty}개 구매', desc: '사과케익/녹차케익', color: '#374151', icon: '🧂', baseName: '설탕' },
+            { id: 'flour', type: 'base', title: '📦 밀가루 {qty}개 구매', desc: '사과케익/녹차케익', color: '#374151', icon: '📦', baseName: '밀가루' },
+            { id: 'cream', type: 'base', title: '🥛 생크림 {qty}개 구매', desc: '사과케익/스테이크/호박스프/녹차케익', color: '#374151', icon: '🥛', baseName: '생크림' },
+            { id: 'garlic', type: 'base', title: '🧄 마늘 {qty}개 구매', desc: '스테이크용', color: '#374151', icon: '🧄', baseName: '마늘' },
+            { id: 'onion', type: 'base', title: '🧅 양파 {qty}개 채집', desc: '야채볶음/호박스프/농어매운탕', color: '#374151', icon: '🧅', baseName: '양파' },
+            { id: 'cabbage', type: 'base', title: '🥬 양배추 {qty}개 구매', desc: '야채볶음용', color: '#374151', icon: '🥬', baseName: '양배추' },
+            { id: 'herb', type: 'base', title: '🌿 허브 {qty}개 채집', desc: '야채볶음용', color: '#15803d', icon: '🌿', baseName: '허브' },
+            { id: 'pumpkin_base', type: 'base', title: '🎃 호박 {qty}개 채집', desc: '호박스프용', color: '#f59e0b', icon: '🎃', baseName: '호박' },
+            { id: 'ginger', type: 'base', title: '🍠 생강 {qty}개 구매', desc: '호박스프용', color: '#374151', icon: '🍠', baseName: '생강' },
+            { id: 'carrot', type: 'base', title: '🥕 당근 {qty}개 구매', desc: '카레용', color: '#ef4444', icon: '🥕', baseName: '당근' },
+            { id: 'curry_powder', type: 'base', title: '🍛 카레가루 {qty}개 구매', desc: '카레용', color: '#f59e0b', icon: '🍛', baseName: '카레가루' },
+            { id: 'bass', type: 'base', title: '🐟 농어 {qty}개 낚시', desc: '매운탕용', color: '#4f46e5', icon: '🐟', baseName: '농어' },
+            { id: 'radish', type: 'base', title: '🥬 무 {qty}개 구매', desc: '매운탕용', color: '#374151', icon: '🥬', baseName: '무' },
+            { id: 'tea_leaf', type: 'base', title: '🍃 찻잎 {qty}개 채집', desc: '녹차케익용', color: '#15803d', icon: '🍃', baseName: '찻잎' },
+            { id: 'strawberry', type: 'base', title: '🍓 딸기 {qty}개 구매', desc: '녹차케익용', color: '#ef4444', icon: '🍓', baseName: '딸기' }
+        ];
+
+        let appData = {};
+
+        function init() {
+            loadData();
+
+            // charKeys 세팅
+            charKeys = appData.characters.map(c => c.id);
+
+            // migration: rice/potato description from localstorage if any
+            prepItemsDef.forEach(item => {
+                const savedTitle = localStorage.getItem(`prep_title_${item.id}`);
+                const savedDesc = localStorage.getItem(`prep_desc_${item.id}`);
+                const savedIcon = localStorage.getItem(`prep_icon_${item.id}`);
+                if (savedTitle) item.title = savedTitle;
+                if (savedDesc) item.desc = savedDesc;
+                if (savedIcon) item.icon = savedIcon;
+            });
+            renderMenuToggles();
+            renderHeaders();
+            refreshAll();
+
+            // 닉네임 로드 불필요 - appData.characters 사용
+            document.getElementById('tab-memo').value = localStorage.getItem('mabi_tab_memo') || '';
+        }
+
+        function loadData() {
+            const stored = localStorage.getItem('mabi_data_v9');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                if (!parsed.version || parsed.version < initialData.version) {
+                    appData = JSON.parse(JSON.stringify(initialData));
+                    saveData();
+                } else {
+                    appData = parsed;
+                    if (!appData.commonPrep) appData.commonPrep = [];
+                    if (!appData.characters) appData.characters = JSON.parse(JSON.stringify(initialData.characters));
+
+                    // 기존 데이터 대규모 호환 패치 (버전9 기준)
+                    if (appData.shopping) {
+                        appData.shopping.forEach(group => {
+                            if (group.village === '이멘 마하') group.village = '이멘마하';
+                            if (group.village === '티르 코네일') group.village = '티르코네일';
+                            group.items.forEach(si => {
+                                si.item = si.item.replace(/\(\d+.*?\)/g, '').replace(/,\s*,/g, ',').replace(/,\s*$/g, '');
+                            });
+                        });
+                        if (appData.weekly) appData.weekly.forEach(g => {
+                            if (g.village === '이멘 마하') g.village = '이멘마하';
+                            if (g.village === '티르 코네일') g.village = '티르코네일';
+                        });
+                        if (appData.daily) appData.daily.forEach(g => {
+                            if (g.village === '이멘 마하') g.village = '이멘마하';
+                            if (g.village === '티르 코네일') g.village = '티르코네일';
+                        });
+                    }
+                }
+            } else {
+                appData = JSON.parse(JSON.stringify(initialData));
+                saveData();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('mabi_data_v9', JSON.stringify(appData));
+        }
+
+        // --- 렌더링 ---
+        function refreshAll() {
+            renderPrepGrid();
+            renderCommonPrep();
+
+            // 요리 데이터 분리 (Daily / Weekly)
+            const dailyCook = [];
+            const weeklyCook = [];
+
+            appData.cooking.forEach(group => {
+                group.items.forEach(item => {
+                    const menu = appData.menus.find(m => m.id === item.tag);
+                    const label = menu ? menu.label : "";
+                    // 데일리 판별 로직 (기존 토글 로직과 동일)
+                    if (label.includes('(일일)') || item.tag === 'apple_cake' || item.tag === 'steak' || item.tag === 'veggie') {
+                        dailyCook.push(item);
+                    } else {
+                        weeklyCook.push(item);
+                    }
+                });
+            });
+
+            const splitCooking = [];
+            if (dailyCook.length > 0) splitCooking.push({ village: '☀️ DAILY', items: dailyCook });
+            if (weeklyCook.length > 0) splitCooking.push({ village: '🗓️ WEEKLY', items: weeklyCook });
+
+            renderBody('body-cooking', splitCooking, 'cook');
+            renderBody('body-shopping', appData.shopping, 'shop');
+            renderBody('body-weekly', appData.weekly, 'week');
+            renderBody('body-daily', appData.daily, 'day');
+        }
+
+        function renderMenuToggles() {
+            const dContainer = document.getElementById('menu-toggles-daily');
+            const wContainer = document.getElementById('menu-toggles-weekly');
+            let dHtml = '', wHtml = '';
+
+            appData.menus.forEach(tag => {
+                const isActive = isTagActive(tag.id);
+                const html = `
+                <div class="toggle-item ${isActive ? 'active' : ''}">
+                    <div class="toggle-switch" onclick="toggleMenu('${tag.id}', this.parentElement)"><div class="toggle-dot"></div></div>
+                    <span class="toggle-label" onclick="toggleMenu('${tag.id}', this.parentElement)">${tag.label.replace(' (일일)', '').replace(' (주간)', '')}</span>
+                </div>
+            `;
+                if (tag.label.includes('(일일)') || tag.id === 'apple_cake' || tag.id === 'steak' || tag.id === 'veggie') {
+                    dHtml += html;
+                } else {
+                    wHtml += html;
+                }
+            });
+            dContainer.innerHTML = dHtml;
+            wContainer.innerHTML = wHtml;
+        }
+
+        function isTagActive(tagId) {
+            const state = localStorage.getItem(`menu_${tagId}`);
+            return state === null ? true : (state === 'true');
+        }
+
+        function toggleMenu(id, el) {
+            const newState = !el.classList.contains('active');
+            if (newState) el.classList.add('active'); else el.classList.remove('active');
+            localStorage.setItem(`menu_${id}`, newState);
+            refreshAll();
+        }
+
+        function toggleCharSection(header) {
+            header.classList.toggle('collapsed');
+            const nick = header.innerText.split(' ')[0]; // 단순 식별용
+            const char = charKeys.find(k => getNick(k) === nick || k === nick) || nick;
+
+            // charKey를 찾기 위해 역추적하거나, header에 data-char 속성을 넣는게 좋음.
+            // renderPrepGrid 수정 필요.
+            const grid = header.nextElementSibling;
+            if (grid) {
+                const isCollapsed = header.classList.contains('collapsed');
+                if (isCollapsed) grid.style.display = 'none';
+                else grid.style.display = 'grid';
+                // 상태 저장 (data-char 속성이 없으면 닉네임으로라도 저장 시도)
+                const charKey = header.dataset.char || char;
+                localStorage.setItem(`prep_section_collapsed_${charKey}`, isCollapsed);
+            }
+        }
+
+        function renderPrepGrid() {
+            const container = document.getElementById('dynamic-prep-area');
+            if (!appData.customPrep) appData.customPrep = [];
+            let html = '';
+
+            charKeys.forEach(char => {
+                let cardsData = [];
+
+                // 1. 기본/역할 아이템 (기존 prepItemsDef 기반)
+                // 동적 계산: appData.cooking의 모든 항목을 스캔하여 재료 합산
+                const baseTotals = {}; // { '고기': { qty: 0, sources: [] } }
+
+                appData.cooking[0].items.forEach(cookItem => {
+                    const tag = cookItem.tag;
+                    if (isTagActive(tag)) {
+                        const roles = getRole(tag, cookItem.defaultRole || ['each']);
+                        if (roles.includes(char) || roles.includes('each')) {
+                            // 재료 파싱 (예: "고기 70, 생크림 14")
+                            const ings = cookItem.item.split(', ');
+                            ings.forEach(ing => {
+                                const parts = ing.trim().split(' ');
+                                if (parts.length >= 2) {
+                                    const qtyStr = parts.pop(); // 마지막이 숫자
+                                    const name = parts.join(' '); // 나머지는 이름
+                                    const qty = parseInt(qtyStr) || 0;
+
+                                    // 모든 재료를 baseTotals에 합산 (customPrep 여부 상관없이)
+                                    if (qty > 0) {
+                                        if (!baseTotals[name]) baseTotals[name] = { qty: 0, sources: [] };
+                                        baseTotals[name].qty += qty;
+                                        const menu = appData.menus.find(m => m.id === tag);
+                                        // 메뉴 이름에서 첫 단어 추출 (예: "🐟 농어매운탕" → "농어매운탕")
+                                        let shortName = tag;
+                                        if (menu) {
+                                            const cleanLabel = menu.label.replace(/\s*\(주간\)/, '').replace(/\s*\(일일\)/, '');
+                                            const labelParts = cleanLabel.split(' ');
+                                            shortName = labelParts.length > 1 ? labelParts[1] : labelParts[0];
+                                        }
+                                        baseTotals[name].sources.push(`${shortName}(${qty})`);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                prepItemsDef.forEach(item => {
+                    let show = false;
+                    let totalQty = 0;
+                    let sourceDetails = [];
+
+                    if (item.type === 'static' && item.owner === char) {
+                        show = true;
+                    } else if (item.type === 'role') {
+                        // Role type deprecated in favor of baseTotals calculation but kept for compatibility logic if needed
+                    } else if (item.type === 'base') {
+                        // baseName으로 매칭
+                        const data = baseTotals[item.baseName];
+                        if (data && data.qty > 0) {
+                            // customPrep에 이 재료가 있는지 확인 (있으면 중복이므로 건너뜀)
+                            const existsInCustom = appData.customPrep && appData.customPrep.some(cp => {
+                                if (!isTagActive(cp.tag)) return false;
+                                const role = getRole(cp.tag, 'each');
+                                if (!role.includes(char) && !role.includes('each')) return false;
+
+                                const nameMatch = cp.title.match(/^(?:🌿|🔨|🛒|🍎|🍖|🍚|🥔|🧂|🥕|🥚|📦|🌶️|🧄|🧅|🥬|🎃|🍠|🍛|🐟|🍃|🍓|🎣|🛠️)?\s*([가-힣a-zA-Z]+)/);
+                                let baseName = nameMatch ? nameMatch[1] : '';
+                                if (!baseName) {
+                                    const parts = cp.title.split(' ');
+                                    baseName = parts.length > 1 ? parts[1] : parts[0];
+                                }
+                                baseName = baseName.replace(/\d+개?/g, '').trim();
+
+                                return baseName === item.baseName;
+                            });
+
+                            if (!existsInCustom) {
+                                totalQty = data.qty;
+                                sourceDetails = data.sources;
+                                show = true;
+                            }
+                        }
+                    }
+
+                    if (show) {
+                        const isChecked = localStorage.getItem(`prep_${item.id}_${char}`) === 'true';
+                        let finalTitle = item.title.replace('{qty}', totalQty);
+                        let finalDesc = item.desc;
+
+                        if (sourceDetails.length > 0) finalDesc = sourceDetails.join(' + ');
+
+                        // Action detection update
+                        // 낚시/채집/구매/제작 판별
+                        let action = '구매';
+                        if (finalTitle.includes('채집')) action = '채집';
+                        else if (finalTitle.includes('제작')) action = '제작';
+                        else if (finalTitle.includes('낚시')) action = '낚시';
+
+                        // 농어/양파 등 특수 케이스 반영 (이미 title이 변경되었지만 안전장치)
+                        if (item.baseName === '농어') action = '낚시';
+                        if (item.baseName === '양파') action = '채집';
+
+                        // 제목 재구성 (수량 반영)
+                        const prefix = item.icon || '';
+                        const name = item.baseName || finalTitle.split(' ')[1];
+                        finalTitle = `${prefix} ${name} ${totalQty}개 ${action}`;
+
+                        cardsData.push({
+                            id: item.id,
+                            char: char,
+                            title: finalTitle,
+                            desc: finalDesc,
+                            color: item.color,
+                            isChecked: isChecked,
+                            editable: true,
+                            idx: -1,
+                            type: 'static'
+                        });
+                    }
+                });
+
+                // 2. 커스텀 및 레시피 아이템 - baseName으로 합치기
+                const mergedMap = new Map();
+                appData.customPrep.forEach((cp, idx) => {
+                    if (isTagActive(cp.tag)) {
+                        const role = getRole(cp.tag, 'each');
+                        if (role.includes(char) || role.includes('each')) {
+                            // baseName 추출: 이모지, 숫자, 액션 단어 제거
+                            let baseName = cp.title
+                                .replace(/^(([\u{10000}-\u{10FFFF}]|[\u2000-\u3300])[\uFE00-\uFE0F]?)+\s*/u, '') // 이모지 제거 (확장)
+                                .replace(/\d+개?\s*/g, '') // 숫자와 '개' 제거
+                                .replace(/\s*(구매|채집|제작|낚시)\s*$/, '') // 액션 단어 제거
+                                .trim();
+
+                            // 이미 처리된 재료면 건너뛰기
+                            if (mergedMap.has(baseName)) return;
+
+                            // baseTotals에서 합산된 수량과 출처 가져오기
+                            const baseData = baseTotals[baseName];
+                            const qtyMatch = cp.title.match(/(\d+)개/);
+                            const cpQty = qtyMatch ? parseInt(qtyMatch[1]) : 0;
+
+                            // baseTotals에 데이터가 있으면 그것 사용, 없으면 customPrep 데이터 사용
+                            const totalQty = baseData ? baseData.qty : cpQty;
+                            const sources = baseData ? baseData.sources : [`${cp.tag}(${cpQty})`];
+
+                            mergedMap.set(baseName, {
+                                ...cp,
+                                totalQty: totalQty,
+                                sources: sources,
+                                isCustom: !cp.id.includes('_'),
+                                firstTitle: cp.title,
+                                lastIdx: idx
+                            });
+                        }
+                    }
+                });
+
+                mergedMap.forEach((val, key) => {
+                    const isChecked = localStorage.getItem(`prep_${val.id}_${char}`) === 'true';
+                    // 첫 번째 아이템의 타이틀에서 아이콘과 액션 추출
+                    const sourceTitle = val.firstTitle || val.title;
+                    const prefix = sourceTitle.match(/^([\u{10000}-\u{10FFFF}]|[\u2000-\u3300])[\uFE00-\uFE0F]?/u)?.[0] || '🛠️';
+                    const action = sourceTitle.includes('채집') ? '채집' : (sourceTitle.includes('제작') ? '제작' : (sourceTitle.includes('낚시') ? '낚시' : '구매'));
+                    const finalTitle = `${prefix} ${key} ${val.totalQty}개 ${action}`;
+                    const finalDesc = val.sources.join(' + ');
+                    cardsData.push({
+                        id: val.id, char, title: finalTitle, desc: finalDesc, color: val.color, isChecked, editable: true, idx: val.lastIdx, type: val.isCustom ? 'custom' : 'recipe'
+                    });
+                });
+
+                // 타입별 정렬: 구매 → 채집 → 제작 → 낚시 순서
+                // 체크 상태 우선, 그 다음 타입순
+                const typeOrder = { '구매': 1, '채집': 2, '제작': 3, '낚시': 4 };
+                cardsData.sort((a, b) => {
+                    // 타입 추출
+                    const getType = (title) => {
+                        if (title.includes('구매')) return '구매';
+                        if (title.includes('채집')) return '채집';
+                        if (title.includes('제작')) return '제작';
+                        if (title.includes('낚시')) return '낚시';
+                        return '기타';
+                    };
+
+                    // 1차: 체크 상태 (미체크 먼저)
+                    if (a.isChecked !== b.isChecked) {
+                        return a.isChecked ? 1 : -1;
+                    }
+
+                    // 2차: 타입 순서
+                    const typeA = getType(a.title);
+                    const typeB = getType(b.title);
+
+                    const orderA = typeOrder[typeA] || 999;
+                    const orderB = typeOrder[typeB] || 999;
+
+                    return orderA - orderB;
+                });
+
+                let cardsHtml = cardsData.map(c => createCardHtml(c.id, c.char, c.title, c.desc, c.color, c.isChecked, c.editable, c.idx, c.type)).join('');
+
+                if (cardsHtml) {
+                    // 첫 번째 캐릭터(인덱스 0)는 기본 열림, 나머지는 기본 닫힘
+                    const savedState = localStorage.getItem(`prep_section_collapsed_${char}`);
+                    const isFirstChar = charKeys.indexOf(char) === 0;
+                    const isCollapsed = savedState !== null ? (savedState === 'true') : !isFirstChar;
+
+                    html += `
+                    <div class="char-divider ${isCollapsed ? 'collapsed' : ''}" data-char="${char}" onclick="toggleCharSection(this)">${getNick(char)} <span style="font-size:0.8rem; float:right;">▼</span></div>
+                    <div class="special-grid" style="display:grid; ${isCollapsed ? 'display:none;' : ''}">${cardsHtml}</div>`;
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        function renderCommonPrep() {
+            const area = document.getElementById('common-prep-area');
+            let cardsData = [];
+
+            appData.commonPrep.forEach((cp, idx) => {
+                const isChecked = localStorage.getItem(`prep_${cp.id}_common`) === 'true';
+                cardsData.push({ ...cp, isChecked, idx });
+            });
+
+            // 정렬
+            cardsData.sort((a, b) => (a.isChecked === b.isChecked) ? 0 : a.isChecked ? 1 : -1);
+
+            let cardsHtml = cardsData.map(c => createCardHtml(c.id, 'common', c.title, c.desc, c.color || '#4b5563', c.isChecked, true, c.idx, 'common')).join('');
+            area.innerHTML = cardsHtml || '<p style="text-align:center; width:100%; opacity:0.5; font-size:0.8rem;">활성화된 공통 준비물이 없습니다.</p>';
+        }
+
+        function createCardHtml(id, char, title, desc, color, isChecked, editable, idx, type) {
+            let actions = '';
+            if (editable) {
+                actions = `
+                    <div class="card-actions" onclick="event.stopPropagation();">
+                        <button class="card-action-btn" onclick="openPrepEditModal('${id}', ${idx}, '${type}')">✏️</button>
+                    </div>
+                `;
+            }
+            return `
+                <div class="card ${isChecked ? 'checked' : ''}" draggable="${type === 'custom' ? 'true' : 'false'}" 
+                     ondragstart="handlePrepDragStart(event, ${idx})" ondragover="handlePrepDragOver(event)" ondrop="handlePrepDrop(event, ${idx})" 
+                     onclick="togglePrep('${id}', '${char}')">
+                    ${actions}
+                    <div class="card-content">
+                        <h3 style="color:${color}">${title}</h3>
+                        <p>${desc}</p>
+                    </div>
+                    <div class="prep-check-circle"></div>
+                </div>
+            `;
+        }
+
+        // --- 준비물 드래그 앤 드롭 (커스텀 전용) ---
+        let prepDragSrcIdx = null;
+        function handlePrepDragStart(e, idx) {
+            if (idx === undefined) { e.preventDefault(); return; }
+            prepDragSrcIdx = idx;
+            e.dataTransfer.effectAllowed = 'move';
+        }
+        function handlePrepDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; return false; }
+        function handlePrepDrop(e, targetIdx) {
+            e.stopPropagation();
+            if (prepDragSrcIdx !== null && targetIdx !== undefined && prepDragSrcIdx !== targetIdx) {
+                const item = appData.customPrep.splice(prepDragSrcIdx, 1)[0];
+                appData.customPrep.splice(targetIdx, 0, item);
+                saveData();
+                refreshAll();
+            }
+            return false;
+        }
+
+        // --- 준비물 편집 로직 ---
+        function openPrepEditModal(id, idx, type) {
+            document.getElementById('edit-prep-id').value = id; // use ID now
+            document.getElementById('edit-prep-type').value = type;
+
+            const titleInp = document.getElementById('prep-title');
+            const descInp = document.getElementById('prep-desc');
+            const colorInp = document.getElementById('prep-color');
+            const titleGroup = document.getElementById('prep-title-group');
+            const colorGroup = document.getElementById('prep-color-group');
+            const delBtn = document.getElementById('prep-del-btn');
+
+            if (type === 'custom') {
+                const item = appData.customPrep[idx];
+                titleInp.value = item.title;
+                descInp.value = item.desc;
+                colorInp.value = item.color || '#374151';
+                titleGroup.style.display = 'block';
+                document.getElementById('prep-icon-group').style.display = 'block';
+                colorGroup.style.display = 'block';
+                delBtn.style.display = 'block';
+            } else if (type === 'recipe') {
+                const item = appData.customPrep[idx];
+                titleInp.value = item.title;
+                descInp.value = item.desc;
+                colorInp.value = item.color || '#374151';
+                titleGroup.style.display = 'none';
+                document.getElementById('prep-icon-group').style.display = 'block';
+                colorGroup.style.display = 'block';
+                delBtn.style.display = 'none';
+            } else if (type === 'common') {
+                const item = appData.commonPrep[idx];
+                titleInp.value = item.title;
+                descInp.value = item.desc;
+                colorInp.value = item.color || '#4b5563';
+                titleGroup.style.display = 'block';
+                document.getElementById('prep-icon-group').style.display = 'block';
+                colorGroup.style.display = 'block';
+                delBtn.style.display = 'block';
+            } else if (type === 'static') {
+                const item = prepItemsDef.find(i => i.id === id);
+                let displayTitle = item.title || '';
+                // 제목 템플릿의 기존 아이콘을 현재 설정된 아이콘으로 교체
+                if (item.icon) {
+                    displayTitle = displayTitle.replace(/^(([\u{10000}-\u{10FFFF}]|[\u2000-\u3300])[\uFE00-\uFE0F]?)+\s*/u, '');
+                    displayTitle = item.icon + ' ' + displayTitle;
+                }
+                titleInp.value = displayTitle;
+                descInp.value = item.desc || '';
+                colorInp.value = item.color || '#374151';
+                titleGroup.style.display = 'none'; // Still hide title for static/base as it's auto-gen
+                document.getElementById('prep-icon-group').style.display = 'block';
+                colorGroup.style.display = 'block';
+                delBtn.style.display = 'none';
+            }
+
+            document.getElementById('prep-modal').classList.add('open');
+        }
+
+
+
+        function closePrepModal() { document.getElementById('prep-modal').classList.remove('open'); }
+
+        function savePrepEdit() {
+            const id = document.getElementById('edit-prep-id').value;
+            const type = document.getElementById('edit-prep-type').value;
+            const newTitle = document.getElementById('prep-title').value;
+            const newDesc = document.getElementById('prep-desc').value;
+            const newColor = document.getElementById('prep-color').value;
+
+            if (type === 'custom' || type === 'recipe' || type === 'common') {
+                if (type === 'recipe') {
+                    const baseName = newTitle.replace(/ \d+개 (채집|제작|구매|낚시)$/, '').replace(/^(([\u{10000}-\u{10FFFF}]|[\u2000-\u3300])[\uFE00-\uFE0F]?)+\s*/u, '');
+                    appData.customPrep.forEach(cp => {
+                        const cpBaseName = cp.title.replace(/ \d+개 (채집|제작|구매|낚시)$/, '').replace(/^(([\u{10000}-\u{10FFFF}]|[\u2000-\u3300])[\uFE00-\uFE0F]?)+\s*/u, '');
+                        if (cpBaseName === baseName) {
+                            cp.desc = newDesc;
+                            cp.color = newColor;
+                            // 아이콘 업데이트
+                            const newIcon = newTitle.match(/^([\u{10000}-\u{10FFFF}]|[\u2000-\u3300])[\uFE00-\uFE0F]?/u)?.[0];
+                            if (newIcon) {
+                                cp.title = cp.title.replace(/^(([\u{10000}-\u{10FFFF}]|[\u2000-\u3300])[\uFE00-\uFE0F]?)+/u, newIcon);
+                            }
+                        }
+                    });
+                } else if (type === 'common') {
+                    const idx = appData.commonPrep.findIndex(p => p.id === id);
+                    if (idx !== -1) {
+                        appData.commonPrep[idx].title = newTitle;
+                        appData.commonPrep[idx].desc = newDesc;
+                        appData.commonPrep[idx].color = newColor;
+                    }
+                } else {
+                    const idx = appData.customPrep.findIndex(p => p.id === id);
+                    if (idx !== -1) {
+                        appData.customPrep[idx].title = newTitle;
+                        appData.customPrep[idx].desc = newDesc;
+                        appData.customPrep[idx].color = newColor;
+                    }
+                }
+            } else {
+                // static/base 타입 - prepItemsDef와 localStorage에 저장
+                const item = prepItemsDef.find(i => i.id === id);
+                if (item) {
+                    item.desc = newDesc;
+                    item.color = newColor;
+                    // 아이콘 업데이트
+                    const newIcon = newTitle.match(/^([\u{10000}-\u{10FFFF}]|[\u2000-\u3300])[\uFE00-\uFE0F]?/u)?.[0];
+                    if (newIcon) item.icon = newIcon;
+
+                    localStorage.setItem(`prep_desc_${id}`, newDesc);
+                    localStorage.setItem(`prep_color_${id}`, newColor);
+                    if (newIcon) localStorage.setItem(`prep_icon_${id}`, newIcon);
+                }
+            }
+            saveData();
+            refreshAll();
+            closePrepModal();
+        }
+
+        function deletePrepItem() {
+            showConfirm('해당 준비물을 삭제하시겠습니까?', () => {
+                const id = document.getElementById('edit-prep-id').value;
+                const type = document.getElementById('edit-prep-type').value;
+                if (type === 'common') {
+                    appData.commonPrep = appData.commonPrep.filter(p => p.id !== id);
+                } else {
+                    appData.customPrep = appData.customPrep.filter(p => p.id !== id);
+                }
+                saveData();
+                refreshAll();
+                closePrepModal();
+            });
+        }
+
+        function openCommonPrepModal() {
+            const id = `common_${Date.now()}`;
+            appData.commonPrep.push({ id, title: '새 공통 준비물', desc: '설명을 입력하세요', color: '#4b5563' });
+            saveData();
+            refreshAll();
+            openPrepEditModal(id, appData.commonPrep.length - 1, 'common');
+        }
+
+        function setPrepIcon(icon) {
+            const id = document.getElementById('edit-prep-id').value;
+            const type = document.getElementById('edit-prep-type').value;
+            const titleInp = document.getElementById('prep-title');
+
+            if (type === 'static') {
+                localStorage.setItem(`prep_icon_${id}`, icon);
+                const item = prepItemsDef.find(i => i.id === id);
+                if (item) item.icon = icon;
+
+                // 제목 입력 필드도 업데이트
+                let current = titleInp.value.trim();
+                // 모든 이모지 제거 (더 포괄적인 범위)
+                current = current.replace(/^[\u{1F000}-\u{1FFFF}\u{2000}-\u{3300}\u{E000}-\u{F8FF}]([\uFE00-\uFE0F]|\u{E0100}-\u{E01EF})?\s*/u, '');
+                titleInp.value = icon + ' ' + current;
+            } else {
+                let current = titleInp.value.trim();
+                // 모든 이모지 제거 (더 포괄적인 범위)
+                current = current.replace(/^[\u{1F000}-\u{1FFFF}\u{2000}-\u{3300}\u{E000}-\u{F8FF}]([\uFE00-\uFE0F]|\u{E0100}-\u{E01EF})?\s*/u, '');
+                titleInp.value = icon + ' ' + current;
+                // Also save icon separately if we want to extract it later
+                localStorage.setItem(`prep_icon_${id}`, icon);
+            }
+        }
+
+        function getRole(tag, defaultVal) {
+            let itemId = null;
+            appData.cooking[0].items.forEach(i => { if (i.tag === tag) itemId = i.id; });
+            if (!itemId) return defaultVal;
+            const saved = localStorage.getItem(`role_${itemId}`);
+            return saved ? JSON.parse(saved) : defaultVal;
+        }
+
+        function togglePrep(itemId, char) {
+            const key = `prep_${itemId}_${char}`;
+            const isChecked = localStorage.getItem(key) === 'true';
+            localStorage.setItem(key, !isChecked);
+            refreshAll();
+        }
+
+        // --- 모달 로직 ---
+        function openModal() {
+            document.getElementById('modal-title').innerText = '➕ 새 메뉴 추가';
+            document.getElementById('edit-tag-id').value = '';
+            document.getElementById('add-menu-name').value = '';
+            document.getElementById('add-npc').value = '';
+            document.getElementById('add-give-qty').value = '';
+            document.getElementById('add-reward').value = '';
+            document.getElementById('add-reward-qty').value = '';
+            document.getElementById('add-menu-name').disabled = false;
+
+            document.getElementById('add-modal').classList.add('open');
+            document.getElementById('ing-list').innerHTML = '';
+            addIngRow();
+        }
+
+        function openEditModal(tagId) {
+            const menu = appData.menus.find(m => m.id === tagId);
+            if (!menu) return;
+
+            // 모든 필드 초기화 (이전 수정 데이터 제거)
+            document.getElementById('add-cycle').value = 'weekly';
+            document.getElementById('add-village').value = '이멘마하';
+            document.getElementById('add-npc').value = '';
+            document.getElementById('add-give-qty').value = '';
+            document.getElementById('add-reward').value = '';
+            document.getElementById('add-reward-qty').value = '';
+
+            document.getElementById('modal-title').innerText = '✏️ 메뉴 수정';
+            document.getElementById('edit-tag-id').value = tagId;
+            document.getElementById('add-menu-name').value = menu.label.replace(' (일일)', '').replace(' (주간)', '');
+            document.getElementById('add-menu-name').disabled = false;
+
+            // 요리 정보에서 giveQty 추출
+            const cookItem = appData.cooking[0].items.find(i => i.tag === tagId);
+            if (cookItem) {
+                const qtyMatch = cookItem.npc.match(/\((\d+)개\)/);
+                if (qtyMatch) document.getElementById('add-give-qty').value = qtyMatch[1];
+            }
+
+            // 저장된 메뉴 정보 불러오기 (appData.menus에 저장된 정보 사용)
+            if (menu.npc) document.getElementById('add-npc').value = menu.npc;
+            if (menu.giveQty) document.getElementById('add-give-qty').value = menu.giveQty;
+            if (menu.reward) document.getElementById('add-reward').value = menu.reward;
+            if (menu.rewardQty) document.getElementById('add-reward-qty').value = menu.rewardQty;
+            if (menu.cycle) document.getElementById('add-cycle').value = menu.cycle;
+            if (menu.village) document.getElementById('add-village').value = menu.village;
+
+            // 하위 호환성 및 기존 데이터 로드 (필요한 경우만 유지, 연결 해제 후에는 불필요할 수 있으나 안전장치)
+            // 이미 메뉴 객체에 데이터가 있다면 위에서 로드됨. 없다면(구버전 데이터) 아래 로직으로 찾아볼 수도 있음.
+            // 하지만 사용자가 '초기화된다'고 했으므로, 위 코드로 저장이 잘 되었다면 이제 잘 불러와질 것임.
+            // 기존 Exchange 검색 로직은 제거하여 혼란 방지.
+
+            // 재료 목록 구성
+            document.getElementById('ing-list').innerHTML = '';
+
+            // 구매 재료 (쇼핑에서 해당 태그 관련 아이템 찾기 - 텍스트 매칭이라 한계가 있지만 최선)
+            // 구매 재료 (쇼핑에서 해당 태그 관련 아이템 찾기)
+            if (cookItem) {
+                const ings = cookItem.item.split(', ');
+                ings.forEach(ingStr => {
+                    const parts = ingStr.trim().split(' ');
+                    const totalQty = parts.pop(); // last is qty
+                    const name = parts.join(' '); // rest is name
+                    const giveQty = parseInt(document.getElementById('add-give-qty').value) || 1;
+                    const unitQty = Math.ceil(parseInt(totalQty) / giveQty);
+
+                    // 기본값: prepItemsDef 참고
+                    let foundType = 'gather';
+                    let foundVillage = '이멘 마하';
+                    let foundNpc = '';
+
+                    const baseDef = prepItemsDef.find(p => p.baseName === name);
+                    if (baseDef) {
+                        if (baseDef.icon === '🎣' || baseDef.title.includes('낚시')) foundType = 'fishing';
+                        else if (baseDef.title.includes('제작')) foundType = 'craft';
+                        else if (baseDef.title.includes('구매')) foundType = 'shop';
+                    }
+
+                    // customPrep에서 이 메뉴의 재료 타입 확인 (저장된 값 우선)
+                    if (tagId && appData.customPrep) {
+                        const customItem = appData.customPrep.find(cp => cp.tag === tagId && cp.title.includes(name));
+                        if (customItem) {
+                            if (customItem.title.includes('낚시')) foundType = 'fishing';
+                            else if (customItem.title.includes('제작')) foundType = 'craft';
+                            else if (customItem.title.includes('구매')) foundType = 'shop';
+                            else if (customItem.title.includes('채집')) foundType = 'gather';
+
+                            // 저장된 마을/NPC 정보 복구 (값이 있을 경우에만)
+                            if (customItem.village) foundVillage = customItem.village;
+                            if (customItem.npc) foundNpc = customItem.npc;
+                        }
+                    }
+
+                    appData.shopping.forEach(group => {
+                        group.items.forEach(si => {
+                            if (si.item.includes(name)) {
+                                foundType = 'shop';
+                                foundVillage = group.village;
+                                foundNpc = si.npc;
+                            }
+                        });
+                    });
+
+                    addIngRowWithData(foundType, foundVillage, foundNpc, name, unitQty);
+                });
+            }
+
+            document.getElementById('add-modal').classList.add('open');
+        }
+
+        function addIngRowWithData(type, village, npc, name, qty) {
+            addIngRow();
+            const rows = document.querySelectorAll('.ing-row');
+            const row = rows[rows.length - 1];
+            row.querySelector('.ing-type').value = type;
+            row.querySelector('.ing-village').value = village;
+            row.querySelector('.ing-npc').value = npc;
+            row.querySelector('.ing-name').value = name;
+            row.querySelector('.ing-qty').value = qty;
+            toggleIngType(row.querySelector('.ing-type'));
+        }
+        function closeModal() { document.getElementById('add-modal').classList.remove('open'); }
+
+        function addIngRow() {
+            const div = document.createElement('div');
+            div.className = 'ing-row';
+            div.innerHTML = `
+            <select class="ing-type" onchange="toggleIngType(this)">
+                <option value="shop">구매</option>
+                <option value="gather">채집</option>
+                <option value="craft">제작</option>
+                <option value="fishing">낚시</option>
+            </select>
+            <select class="ing-village" style="display:block;">
+                <option value="이멘마하">이멘마하</option>
+                <option value="반호르">반호르</option>
+                <option value="던바튼">던바튼</option>
+                <option value="티르코네일">티르코네일</option>
+                <option value="콜헨">콜헨</option>
+            </select>
+            <input type="text" placeholder="NPC" class="ing-npc" style="display:block;">
+            <input type="text" placeholder="재료명" class="ing-name">
+            <input type="number" placeholder="개" class="ing-qty" min="0">
+            <button class="ing-btn-del" onclick="this.parentElement.remove()">×</button>
+        `;
+            document.getElementById('ing-list').appendChild(div);
+        }
+
+        window.toggleIngType = function (select) {
+            const row = select.parentElement;
+            const v = row.querySelector('.ing-village');
+            const n = row.querySelector('.ing-npc');
+            if (select.value === 'shop') { v.style.display = 'block'; n.style.display = 'block'; }
+            else if (select.value === 'craft' || select.value === 'fishing') { v.style.display = 'none'; n.style.display = 'none'; }
+            else { v.style.display = 'none'; n.style.display = 'none'; }
+        }
+
+        function addItem() {
+            const menuName = document.getElementById('add-menu-name').value.trim();
+            const cycle = document.getElementById('add-cycle').value;
+            const targetNpc = document.getElementById('add-npc').value.trim();
+            const village = document.getElementById('add-village').value;
+            const giveQty = parseInt(document.getElementById('add-give-qty').value) || 0;
+            const reward = document.getElementById('add-reward').value.trim();
+            const rewardQty = document.getElementById('add-reward-qty').value.trim();
+            const editTagId = document.getElementById('edit-tag-id').value;
+
+            // 모든 필드의 빨간 테두리 제거 (이전 에러 표시 초기화)
+            document.getElementById('add-menu-name').style.border = '';
+            document.getElementById('add-npc').style.border = '';
+            document.getElementById('add-give-qty').style.border = '';
+            document.getElementById('add-reward').style.border = '';
+
+            if (!menuName || !targetNpc || !giveQty || !reward) {
+                // 빈 필드에 빨간 테두리 추가
+                if (!menuName) document.getElementById('add-menu-name').style.border = '2px solid #ef4444';
+                if (!targetNpc) document.getElementById('add-npc').style.border = '2px solid #ef4444';
+                if (!giveQty) document.getElementById('add-give-qty').style.border = '2px solid #ef4444';
+                if (!reward) document.getElementById('add-reward').style.border = '2px solid #ef4444';
+
+                // 모달 흔들기 애니메이션
+                const modal = document.querySelector('#add-modal .modal');
+                modal.style.animation = 'shake 0.5s';
+                setTimeout(() => { modal.style.animation = ''; }, 500);
+
+                // 상세 에러 메시지
+                const missing = [];
+                if (!menuName) missing.push('메뉴명');
+                if (!targetNpc) missing.push('교환 NPC');
+                if (!giveQty) missing.push('건네줄 개수');
+                if (!reward) missing.push('보상');
+
+                return alert(`❌ 필수 입력값이 누락되었습니다!
+
+빠진 항목: ${missing.join(', ')}
+
+현재 입력값:
+- 메뉴명: "${menuName || '(빈칸)'}"  
+- 교환 NPC: "${targetNpc || '(빈칸)'}"
+- 건네줄 개수: ${giveQty || '(빈칸)'}
+- 보상: "${reward || '(빈칸)'}"
+
+빨간 테두리가 표시된 칸을 채워주세요!`);
+            }
+
+            const tagId = editTagId || menuName.toLowerCase().replace(/\s/g, '_');
+
+            // 기존 데이터 삭제 (수정인 경우)
+            if (editTagId) {
+                // 1. 쇼핑 아이템에서 해당 재료들 제거 (텍스트 제거라 복잡함)
+                // 단순히 다시 그린다면 기존 쇼핑 데이터를 초기화하고 다시 넣는게 좋으나, 
+                // 여기서는 기존 'addItem'과 보조를 맞추기 위해 tag 기반 정리가 필요함.
+                // 하지만 현재 쇼핑 구조상 tag가 없으므로 생략하거나, 이번 기회에 모든 데이터를 tag 기반으로 관리하도록 개선해야 함.
+                // 일단 수동 추가된 항목만이라도 덮어쓰기 위해 Cooking, Exchange는 tag로 필터링 가능.
+                appData.cooking[0].items = appData.cooking[0].items.filter(i => i.tag !== tagId);
+                appData.weekly.forEach(g => g.items = g.items.filter(i => i.tag !== tagId));
+                appData.daily.forEach(g => g.items = g.items.filter(i => i.tag !== tagId));
+                if (appData.customPrep) appData.customPrep = appData.customPrep.filter(i => i.tag !== tagId);
+
+                // 쇼핑 항목 정리는 아이템 매칭으로 시도 (위험하지만 현재 구조상 최선)
+                // 실제 상용 앱이라면 쇼핑 아이템에도 tag를 붙였어야 함.
+            }
+
+            const ingRows = document.querySelectorAll('.ing-row');
+            let ingDesc = [];
+
+            if (!appData.menus.find(m => m.id === tagId)) {
+                appData.menus.push({
+                    id: tagId,
+                    label: menuName + (cycle === 'daily' ? ' (일일)' : ' (주간)'),
+                    npc: targetNpc,
+                    village: village,
+                    cycle: cycle,
+                    giveQty: giveQty,
+                    reward: reward,
+                    rewardQty: rewardQty
+                });
+            } else {
+                const m = appData.menus.find(m => m.id === tagId);
+                m.label = menuName + (cycle === 'daily' ? ' (일일)' : ' (주간)');
+                m.npc = targetNpc;
+                m.village = village;
+                m.cycle = cycle;
+                m.giveQty = giveQty;
+                m.reward = reward;
+                m.rewardQty = rewardQty;
+            }
+
+            ingRows.forEach(row => {
+                const name = row.querySelector('.ing-name').value.trim();
+                const qty = row.querySelector('.ing-qty').value.trim();
+                const type = row.querySelector('.ing-type').value;
+
+                if (name && qty) {
+                    const totalQty = parseInt(qty) * giveQty;
+                    ingDesc.push(`${name} ${totalQty}`);
+
+                    // 수정사항: 기본 정의 여부 상관없이 menu editor에서 지정하면 customPrep에 저장 (Override)
+                    // const isKnownBase = prepItemsDef.some(p => p.baseName === name);
+
+                    if (type === 'shop' || type === 'gather' || type === 'craft' || type === 'fishing') {
+                        if (!appData.customPrep) appData.customPrep = [];
+                        let prefix = '🔨';
+                        let action = '제작';
+                        let color = '#8b5cf6';
+
+                        if (type === 'gather') { prefix = '🌿'; action = '채집'; color = '#15803d'; }
+                        else if (type === 'shop') { prefix = '🛒'; action = '구매'; color = '#b45309'; }
+                        if (type === 'fishing') { prefix = '🎣'; action = '낚시'; color = '#3b82f6'; }
+
+                        // 마을/NPC 정보 추출
+                        const rowVillage = row.querySelector('.ing-village').value;
+                        const rowNpc = row.querySelector('.ing-npc').value;
+
+                        appData.customPrep.push({
+                            id: tagId + '_' + name + '_' + Date.now(),
+                            type: 'base',
+                            owner: 'main',
+                            title: `${prefix} ${name} ${totalQty}개 ${action}`,
+                            desc: `${menuName}용`,
+                            color: color,
+                            tag: tagId,
+                            village: rowVillage, // 저장
+                            npc: rowNpc          // 저장
+                        });
+                    }
+                }
+            });
+
+            // 요리
+            appData.cooking[0].items.push({
+                id: editTagId ? (appData.cooking[0].items.find(i => i.tag === tagId)?.id || `c_${Date.now()}`) : `c_${Date.now()}`,
+                npc: `${menuName} (${giveQty}개)`,
+                item: ingDesc.length > 0 ? ingDesc.join(', ') : '재료 없음',
+                tag: tagId,
+                defaultRole: ['each']
+            });
+
+            // 교환 - 메뉴 에디터와 연결 해제 (주간교환은 별도로 관리)
+            // 사용자가 원하면 주간교환 탭에서 직접 추가/관리할 수 있음
+            // const list = cycle === 'weekly' ? appData.weekly : appData.daily;
+            // let group = list.find(g => g.village === village);
+            // if (!group) { group = { village: village, items: [] }; list.push(group); }
+            // group.items.push({ npc: targetNpc, item: `${menuName}, ${giveQty}개 → ${reward}, ${rewardQty}개`, tag: tagId });
+
+            saveData();
+            closeModal();
+            renderMenuToggles();
+            refreshAll();
+
+            // 메뉴 관리 모달이 열려있다면 목록 새로고침 (수정 버튼이 계속 작동하도록)
+            const menuManagerModal = document.getElementById('menu-manager-modal');
+            if (menuManagerModal && menuManagerModal.classList.contains('open')) {
+                renderMenuManageList();
+            }
+
+            alert(editTagId ? '수정되었습니다!' : '추가되었습니다!');
+        }
+
+        // --- 공통 ---
+        function renderHeaders() {
+            const tables = [
+                { id: 'table-shopping', type: 'shop', title: '🛍️ 주간구매' },
+                { id: 'table-cooking', type: 'cook', title: '🍳 요리제작' },
+                { id: 'table-weekly', type: 'week', title: '📦 주간교환' },
+                { id: 'table-daily', type: 'day', title: '🔄 일일교환' }
+            ];
+            tables.forEach(tDef => {
+                const table = document.getElementById(tDef.id);
+                if (!table) return;
+
+                // thead 초기화 방지 또는 덮어쓰기
+                let thead = table.querySelector('thead');
+                if (!thead) {
+                    thead = document.createElement('thead');
+                    table.prepend(thead);
+                }
+
+                let thContent = '';
+                if (tDef.type === 'cook') {
+                    thContent = 'NPC / 항목';
+                } else {
+                    // 관리 버튼 추가
+                    thContent = `<div style="display:flex; align-items:center; gap:5px;">
+                        <span>NPC / 항목</span>
+                        <button class="btn-mini-del" style="background:#e5e7eb; color:#374151; padding:2px 6px; font-size:0.75rem;" onclick="openManageModal('${tDef.type}')">⚙️ 관리</button>
+                    </div>`;
+                }
+
+                let ths = `<tr><th>${thContent}</th>`;
+                // charKeys는 init()에서 세팅됨
+                charKeys.forEach(k => {
+                    const charName = appData.characters.find(c => c.id === k)?.name || k;
+                    // 헤더에서 바로 수정 가능하도록 input 유지 (선택사항)
+                    // 캐릭터 관리 모달에서 수정하지만, 여기서도 되면 편리함.
+                    ths += `<th><input type="text" class="name-input" value="${charName}" onchange="updateCharName('${k}', this.value)" /></th>`;
+                });
+                ths += `</tr>`;
+                thead.innerHTML = ths;
+            });
+        }
+
+        function updateNicknames(val, key) {
+            localStorage.setItem(`nick_${key}`, val);
+            document.querySelectorAll(`input[id^='input-${key}']`).forEach(inp => inp.value = val);
+            refreshAll();
+        }
+        function getNick(key) {
+            return appData.characters.find(c => c.id === key)?.name || key;
+        }
+
+        // 캐릭터 관리 기능
+        function openCharManager() {
+            renderCharList();
+            document.getElementById('char-modal').classList.add('open');
+        }
+        function renderCharList() {
+            const area = document.getElementById('char-list');
+            area.innerHTML = '';
+            appData.characters.forEach((c, idx) => {
+                const div = document.createElement('div');
+                div.className = 'manage-item';
+                div.innerHTML = `
+                    <div class="manage-item-info">
+                         <input type="text" class="form-input" value="${c.name}" onchange="updateCharName('${c.id}', this.value)" style="width:100%; height:30px;">
+                    </div>
+                    <button class="btn-mini-del" onclick="deleteChar('${c.id}')">삭제</button>
+                `;
+                area.appendChild(div);
+            });
+        }
+        function updateCharName(id, val) {
+            const t = appData.characters.find(c => c.id === id);
+            if (t) t.name = val;
+            saveData();
+            refreshAll();
+            renderHeaders();
+        }
+        function deleteChar(id) {
+            if (appData.characters.length <= 1) return alert('최소 1명의 캐릭터는 필요합니다.');
+            showConfirm('캐릭터를 삭제하시겠습니까? 관련 데이터가 초기화됩니다.', () => {
+                appData.characters = appData.characters.filter(c => c.id !== id);
+                saveData();
+                init(); // Re-init charKeys
+                renderCharList();
+            });
+        }
+        function addChar() {
+            const name = document.getElementById('new-char-name').value.trim();
+            if (!name) return;
+            const id = 'sub' + Date.now();
+            appData.characters.push({ id, name });
+            document.getElementById('new-char-name').value = '';
+            saveData();
+            init(); // Re-init charKeys
+            renderCharList();
+        }
+
+        // 메뉴 관리 기능
+        function openMenuManager() {
+            renderMenuManageList();
+            document.getElementById('menu-manager-modal').classList.add('open');
+        }
+        function closeMenuManager() {
+            document.getElementById('menu-manager-modal').classList.remove('open');
+        }
+        function renderMenuManageList() {
+            const area = document.getElementById('menu-manage-list');
+            area.innerHTML = '';
+            appData.menus.forEach((menu, idx) => {
+                const div = document.createElement('div');
+                div.className = 'manage-item';
+                div.innerHTML = `
+                    <div class="manage-item-info">
+                        <div style="font-weight:500;">${menu.label}</div>
+                    </div>
+                    <button class="btn-mini-edit" onclick="openEditModal('${menu.id}'); closeMenuManager();">수정</button>
+                    <button class="btn-mini-del" onclick="deleteMenu('${menu.id}')">삭제</button>
+                `;
+                area.appendChild(div);
+            });
+        }
+        function deleteMenu(tagId) {
+            showConfirm('메뉴를 삭제하시겠습니까? 관련 데이터가 모두 삭제됩니다.', () => {
+                // Remove from menus
+                appData.menus = appData.menus.filter(m => m.id !== tagId);
+                // Remove from cooking
+                appData.cooking[0].items = appData.cooking[0].items.filter(i => i.tag !== tagId);
+                // Remove from exchanges
+                appData.weekly.forEach(g => g.items = g.items.filter(i => i.tag !== tagId));
+                appData.daily.forEach(g => g.items = g.items.filter(i => i.tag !== tagId));
+                // Remove from customPrep
+                if (appData.customPrep) appData.customPrep = appData.customPrep.filter(i => i.tag !== tagId);
+
+                saveData();
+                renderMenuManageList();
+                renderMenuToggles();
+                refreshAll();
+            });
+        }
+
+        function renderBody(tbodyId, data, type) {
+            const tbody = document.getElementById(tbodyId);
+            tbody.innerHTML = '';
+            if (!data) return;
+
+            data.forEach(group => {
+                const isAlwaysShow = ['shop', 'week', 'day'].includes(type);
+                const activeItems = group.items.filter(item => isAlwaysShow || !item.tag || isTagActive(item.tag));
+                if (activeItems.length === 0) return;
+
+                const vRow = document.createElement('tr');
+                vRow.className = 'village-row';
+                vRow.innerHTML = `<td colspan="6">📍 ${group.village}</td>`;
+                tbody.appendChild(vRow);
+
+                // 체크된 항목 정렬 (준비물 외에는 정렬하지 않음)
+                // if (type === 'prep') ... (준비물은 별도 함수에서 처리중)
+                // 따라서 renderBody에서는 기본 순서 유지
+
+                activeItems.forEach((row, idx) => {
+                    const tr = document.createElement('tr');
+                    tr.draggable = true;
+                    tr.ondragstart = handleDragStart;
+                    tr.ondragover = handleDragOver;
+                    tr.ondragleave = handleDragLeave;
+                    tr.ondrop = handleDrop;
+                    tr.ondragend = handleDragEnd;
+
+                    let itemHtml = `
+                        <div class="npc-container">
+                            <div class="drag-handle">⠿</div>
+                            <div class="npc-info">
+                                <div class="npc-name">${row.npc}</div>
+                                <div class="item-desc">${row.item}</div>
+                            </div>
+                    `;
+
+                    if (type === 'cook') {
+                        itemHtml += `
+                            <div class="row-actions">
+                                <button class="action-btn btn-edit" draggable="false" onclick="event.stopPropagation(); openRolePopup('${row.id}', this)" title="담당 설정">👤</button>
+                            </div>
+                        `;
+                    } else if (['shop', 'week', 'day'].includes(type)) {
+                        // 관리 모달로 넘기는게 좋으나, 빠른 수정을 위해 연필 버튼 유지
+                        itemHtml += `
+                            <div class="row-actions">
+                                <button class="action-btn btn-edit" draggable="false" onclick="event.stopPropagation(); editSingleItem('${type}', '${group.village}', ${group.items.indexOf(row)})" title="수정">✏️</button>
+                            </div>
+                        `;
+                    }
+                    itemHtml += `</div>`;
+
+                    let html = `<td>${itemHtml}</td>`;
+
+                    charKeys.forEach(char => {
+                        let disabled = false;
+                        if (type === 'cook') {
+                            let roles = getRole(row.tag, row.defaultRole);
+                            if (!roles.includes('each') && !roles.includes(char)) disabled = true;
+                        }
+                        const id = `${type}_${char}_${row.id || row.npc}_${idx}`; // Unique ID including index
+                        const isChecked = localStorage.getItem(id) === 'true';
+                        if (disabled) html += `<td class="check-cell" style="opacity:0.2; cursor:default;">-</td>`;
+                        else html += `<td class="check-cell ${isChecked ? 'checked' : ''}" onclick="toggleCheck('${id}')"><div class="check-box"></div></td>`;
+                    });
+                    tr.innerHTML = html;
+                    tbody.appendChild(tr);
+                });
+            });
+        }
+
+        function openRolePopup(itemId, btn) {
+            const existing = document.querySelector('.role-popup');
+            if (existing) existing.remove();
+
+            const itemDef = appData.cooking[0].items.find(i => i.id === itemId);
+            let currentRoles = JSON.parse(localStorage.getItem(`role_${itemId}`)) || (itemDef?.defaultRole || ['each']);
+
+            const popup = document.createElement('div');
+            popup.className = 'role-popup show';
+            // 위치 조정
+            const rect = btn.getBoundingClientRect();
+            popup.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+            popup.style.left = (rect.left + window.scrollX) + 'px';
+
+            const opts = [{ v: 'each', l: '각자 제작' }];
+            appData.characters.forEach(c => opts.push({ v: c.id, l: c.name }));
+
+            function renderOptions() {
+                popup.innerHTML = '';
+                opts.forEach(o => {
+                    const div = document.createElement('div');
+                    div.className = 'role-option';
+                    const chk = document.createElement('input');
+                    chk.type = 'checkbox';
+                    chk.checked = currentRoles.includes(o.v);
+
+                    div.style.backgroundColor = chk.checked ? '#eff6ff' : 'transparent';
+
+                    div.onclick = (e) => {
+                        e.stopPropagation();
+                        // Logic
+                        if (o.v === 'each') {
+                            if (!currentRoles.includes('each')) currentRoles = ['each'];
+                            else currentRoles = []; // Toggle off usually allowed? Or enforce one? Let's allow toggle off (empty).
+                        } else {
+                            if (currentRoles.includes('each')) currentRoles = []; // Clear 'each' if selecting specific
+                            if (currentRoles.includes(o.v)) currentRoles = currentRoles.filter(r => r !== o.v);
+                            else currentRoles.push(o.v);
+                        }
+
+                        // Save
+                        if (currentRoles.length === 0 && o.v === 'each') currentRoles = []; // Empty allowed
+                        localStorage.setItem(`role_${itemId}`, JSON.stringify(currentRoles));
+
+                        // Re-render popup UI locally
+                        renderOptions();
+                        // Update Preps immediately
+                        renderPrepGrid();
+                        // Note: We don't refresh Table Body here to keep popup open. 
+                        // Table checks will update on next refresh (e.g. closing popup or other action).
+                    };
+
+                    div.appendChild(chk);
+                    div.appendChild(document.createTextNode(o.l));
+                    popup.appendChild(div);
+                });
+            }
+            renderOptions();
+
+            document.body.appendChild(popup);
+
+            // Close when clicking outside
+            setTimeout(() => {
+                document.addEventListener('click', function close(e) {
+                    if (!popup.contains(e.target) && e.target !== btn) {
+                        popup.remove();
+                        document.removeEventListener('click', close);
+                        refreshAll(); // Refresh table on close to update disabled states
+                    }
+                });
+            }, 0);
+        }
+
+
+
+        function toggleCheck(id) {
+            const isChecked = localStorage.getItem(id) === 'true';
+            localStorage.setItem(id, !isChecked);
+            refreshAll();
+        }
+
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+        }
+
+        function saveTabMemo(val) { localStorage.setItem('mabi_tab_memo', val); }
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function deleteMenu(tagId) {
+            showConfirm('해당 메뉴와 연동된 모든 데이터가 삭제됩니다. 계속하시겠습니까?', () => {
+                appData.menus = appData.menus.filter(m => m.id !== tagId);
+                appData.cooking[0].items = appData.cooking[0].items.filter(i => i.tag !== tagId);
+                appData.weekly.forEach(g => g.items = g.items.filter(i => i.tag !== tagId));
+                appData.daily.forEach(g => g.items = g.items.filter(i => i.tag !== tagId));
+                if (appData.customPrep) appData.customPrep = appData.customPrep.filter(i => i.tag !== tagId);
+                saveData();
+                refreshAll();
+                renderMenuToggles();
+                renderMenuManagerList();
+            });
+        }
+
+        function openMenuManager() {
+            renderMenuManagerList();
+            document.getElementById('menu-manager-modal').classList.add('open');
+        }
+        function closeMenuManager() { document.getElementById('menu-manager-modal').classList.remove('open'); }
+        function renderMenuManagerList() {
+            const area = document.getElementById('menu-manage-list');
+            area.innerHTML = '';
+            appData.menus.forEach(tag => {
+                const div = document.createElement('div');
+                div.className = 'manage-item';
+                div.innerHTML = `
+                    <div class="manage-item-info">
+                        <b>${tag.label}</b>
+                    </div>
+                    <div style="display:flex; gap:4px;">
+                        <button class="btn-mini-del" style="background-color:#f3f4f6; color:#4b5563; border-color:#d1d5db;" onclick="openEditModal('${tag.id}'); closeMenuManager();">수정</button>
+                        <button class="btn-mini-del" onclick="deleteMenu('${tag.id}')">삭제</button>
+                    </div>
+                `;
+                area.appendChild(div);
+            });
+            if (appData.menus.length === 0) area.innerHTML = '<p style="padding:20px; text-align:center; color:#9ca3af;">메뉴가 없습니다.</p>';
+        }
+        function resetAll() {
+            showConfirm('체크 상태를 초기화하시겠습니까? (저장된 메뉴/목록은 유지됩니다)', () => {
+                Object.keys(localStorage).forEach(key => {
+                    if (key.startsWith('prep_') ||
+                        key.startsWith('role_') ||
+                        key.startsWith('menu_') ||
+                        key.startsWith('daily_') ||
+                        key.startsWith('week_') ||
+                        key.startsWith('cook_') ||
+                        key.startsWith('shop_')) {
+                        localStorage.removeItem(key);
+                    }
+                });
+                // 메뉴 상태 초기화 (비활성화)
+                appData.menus.forEach(m => localStorage.setItem(`menu_${m.id}`, 'false'));
+
+                location.reload();
+            });
+        }
+
+        // --- 개별 항목 편집 ---
+        function openSingleModal(type) {
+            document.getElementById('single-modal-title').innerText = '➕ 항목 추가';
+            document.getElementById('edit-type').value = type;
+            document.getElementById('edit-group-village').value = '';
+            document.getElementById('edit-row-idx').value = '';
+
+            document.getElementById('single-npc').value = '';
+            document.getElementById('single-item').value = '';
+
+            if (type === 'day' || type === 'week') {
+                document.getElementById('single-item').style.display = 'none';
+                document.getElementById('exchange-edit-group').style.display = 'block';
+                document.getElementById('ex-give-item').value = '';
+                document.getElementById('ex-give-qty').value = '';
+                document.getElementById('ex-get-item').value = '';
+                document.getElementById('ex-get-qty').value = '';
+            } else {
+                document.getElementById('single-item').style.display = 'block';
+                document.getElementById('exchange-edit-group').style.display = 'none';
+            }
+
+            document.getElementById('single-modal').classList.add('open');
+        }
+
+        function closeSingleModal() {
+            document.getElementById('single-modal').classList.remove('open');
+        }
+
+        function editSingleItem(type, village, idx) {
+            const list = type === 'shop' ? appData.shopping : (type === 'week' ? appData.weekly : appData.daily);
+            const group = list.find(g => g.village === village);
+            if (!group) return;
+            const item = group.items[idx];
+            if (!item) return;
+
+            document.getElementById('single-modal-title').innerText = '✏️ 항목 수정';
+            document.getElementById('edit-type').value = type;
+            document.getElementById('edit-group-village').value = village;
+            document.getElementById('edit-row-idx').value = idx;
+
+            document.getElementById('single-village').value = village;
+            document.getElementById('single-npc').value = item.npc || '';
+            document.getElementById('single-item').value = item.item || '';
+
+            // 교환 전용 UI 처리 (일일/주간)
+            if (type === 'day' || type === 'week') {
+                document.getElementById('exchange-edit-group').style.display = 'block';
+                document.getElementById('single-item').style.display = 'none';
+
+                const parts = item.item.split('→');
+                if (parts.length === 2) {
+                    const left = parts[0].trim();
+                    const right = parts[1].trim();
+                    const leftMatch = left.match(/(.*?)[\s,]+(\d+)개$/);
+                    const rightMatch = right.match(/(.*?)[\s,]+(\d+)개$/);
+
+                    if (leftMatch) {
+                        document.getElementById('ex-give-item').value = leftMatch[1].replace(/,$/, '').trim();
+                        document.getElementById('ex-give-qty').value = leftMatch[2];
+                    } else {
+                        document.getElementById('ex-give-item').value = left;
+                        document.getElementById('ex-give-qty').value = '';
+                    }
+                    if (rightMatch) {
+                        document.getElementById('ex-get-item').value = rightMatch[1].replace(/,$/, '').trim();
+                        document.getElementById('ex-get-qty').value = rightMatch[2];
+                    } else {
+                        document.getElementById('ex-get-item').value = right;
+                        document.getElementById('ex-get-qty').value = '';
+                    }
+                } else {
+                    document.getElementById('ex-give-item').value = '';
+                    document.getElementById('ex-give-qty').value = '';
+                    document.getElementById('ex-get-item').value = '';
+                    document.getElementById('ex-get-qty').value = '';
+                }
+            } else {
+                document.getElementById('exchange-edit-group').style.display = 'none';
+                document.getElementById('single-item').style.display = 'block';
+            }
+
+            document.getElementById('single-modal').classList.add('open');
+        }
+
+        function deleteSingleItem(type, village, idx) {
+            // This is now handled by manager modal to avoid interaction issues
+            const list = type === 'shop' ? appData.shopping : (type === 'week' ? appData.weekly : appData.daily);
+            const group = list.find(g => g.village === village);
+            if (group) {
+                group.items.splice(idx, 1);
+                if (group.items.length === 0) {
+                    const gIdx = list.indexOf(group);
+                    list.splice(gIdx, 1);
+                }
+                saveData();
+                refreshAll();
+            }
+        }
+
+        // --- 관리 모달 로직 ---
+        function openManageModal(type) {
+            document.getElementById('manage-type').value = type;
+            const title = type === 'shop' ? '🛍️ 주간구매 관리' : (type === 'week' ? '📦 주간교환 관리' : '🔄 일일교환 관리');
+            document.getElementById('manager-modal-title').innerText = title;
+
+            renderManageList();
+            document.getElementById('manager-modal').classList.add('open');
+        }
+
+        function closeManagerModal() {
+            document.getElementById('manager-modal').classList.remove('open');
+        }
+
+        function renderManageList() {
+            const type = document.getElementById('manage-type').value;
+            const list = type === 'shop' ? appData.shopping : (type === 'week' ? appData.weekly : appData.daily);
+            const area = document.getElementById('manage-list');
+            area.innerHTML = '';
+
+            list.forEach(group => {
+                group.items.forEach((item, idx) => {
+                    const div = document.createElement('div');
+                    div.className = 'manage-item';
+                    div.innerHTML = `
+                        <div class="manage-item-info">
+                            <b>${item.npc}</b> [${group.village}]
+                            <span>${item.item}</span>
+                        </div>
+                        <div style="display:flex; gap:5px;">
+                            <button class="btn-mini-del" style="background:#e5e7eb; color:#374151; border-color:#d1d5db;" onclick="editSingleItem('${type}', '${group.village}', ${idx})">수정</button>
+                            <button class="btn-mini-del" onclick="deleteManageItem('${type}', '${group.village}', ${idx})">삭제</button>
+                        </div>
+                    `;
+                    area.appendChild(div);
+                });
+            });
+
+            if (area.innerHTML === '') area.innerHTML = '<p style="padding:20px; text-align:center; color:#9ca3af;">항목이 없습니다.</p>';
+        }
+
+        function deleteManageItem(type, village, idx) {
+            showConfirm('이 항목을 삭제하시겠습니까?', () => {
+                deleteSingleItem(type, village, idx);
+                renderManageList();
+            });
+        }
+
+        function saveSingleItem() {
+            const type = document.getElementById('edit-type').value;
+            const oldVillage = document.getElementById('edit-group-village').value;
+            const idx = document.getElementById('edit-row-idx').value;
+
+            const newVillage = document.getElementById('single-village').value;
+            const npc = document.getElementById('single-npc').value.trim();
+            const itemText = document.getElementById('single-item').value.trim();
+
+            let finalItemText = itemText;
+            // 일일/주간 교환 모두 적용
+            if (type === 'day' || type === 'week') {
+                const dayItem = document.getElementById('ex-give-item').value.trim();
+                const dayQty = document.getElementById('ex-give-qty').value.trim();
+                const rewardItem = document.getElementById('ex-get-item').value.trim();
+                const rewardQty = document.getElementById('ex-get-qty').value.trim();
+
+                // 값이 하나라도 있으면 교환 형식으로 저장 시도
+                if (dayItem || dayQty || rewardItem || rewardQty) {
+                    finalItemText = `${dayItem} ${dayQty}개 → ${rewardItem} ${rewardQty}개`;
+                }
+            }
+
+            if (!npc || !finalItemText) return alert('모든 내용을 입력해주세요.');
+
+            const list = type === 'shop' ? appData.shopping : (type === 'week' ? appData.weekly : appData.daily);
+
+            // 수정 모드인 경우 기존 위치에서 제거 (마을이 바뀔 수 있으므로)
+            if (oldVillage !== '' && idx !== '') {
+                const oldGroup = list.find(g => g.village === oldVillage);
+                if (oldGroup && oldGroup.items[idx]) {
+                    oldGroup.items.splice(idx, 1);
+                    if (oldGroup.items.length === 0) {
+                        const gIdx = list.indexOf(oldGroup);
+                        if (gIdx > -1) list.splice(gIdx, 1);
+                    }
+                }
+            }
+
+            // 새 위치에 추가
+            let group = list.find(g => g.village === newVillage);
+            if (!group) {
+                group = { village: newVillage, items: [] };
+                list.push(group);
+            }
+            // 같은 마을이면 맨 뒤로 가는게 아니라 수정된 위치 혹은 적절한 위치?
+            // 현재 로직은 push (맨 뒤). 드래그로 정렬 가능하므로 허용.
+            group.items.push({ npc, item: finalItemText });
+
+            saveData();
+            closeSingleModal();
+            refreshAll();
+
+            // 관리 모달이 열려있다면 갱신
+            if (document.getElementById('manager-modal').classList.contains('open')) {
+                renderManageList();
+            }
+        }
+
+        function moveCookItem(idx, direction) {
+            const list = appData.cooking[0].items;
+            const newIdx = idx + direction;
+            if (newIdx < 0 || newIdx >= list.length) return;
+
+            // Swap
+            const temp = list[idx];
+            list[idx] = list[newIdx];
+            list[newIdx] = temp;
+
+            saveData();
+            refreshAll();
+        }
+
+        // 삭제 기능 추가 (편집 모달 내)
+        function deleteCurrentItem() {
+            const type = document.getElementById('edit-type').value;
+            const village = document.getElementById('edit-group-village').value;
+            const idx = document.getElementById('edit-row-idx').value;
+
+            if (village === '' || idx === '') return;
+
+            showConfirm('정말 삭제하시겠습니까?', () => {
+                deleteSingleItem(type, village, parseInt(idx));
+                closeSingleModal();
+                if (document.getElementById('manager-modal').classList.contains('open')) {
+                    renderManageList();
+                }
+            });
+        }
+
+        // --- 드래그 앤 드롭 ---
+        let dragSrcEl = null;
+
+        function handleDragStart(e) {
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', ''); // Firefox fix
+            this.classList.add('dragging');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) e.preventDefault();
+            if (this === dragSrcEl) return false;
+
+            // 동일한 섹션(type) 내에서만 드래그 허용
+            if (this.dataset.type !== dragSrcEl.dataset.type) return false;
+
+            this.classList.add('drag-over');
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) e.stopPropagation();
+            if (dragSrcEl !== this) {
+                const type = dragSrcEl.dataset.type;
+                const srcVillage = dragSrcEl.dataset.village;
+                const srcIdx = parseInt(dragSrcEl.dataset.index);
+                const targetVillage = this.dataset.village;
+                const targetIdx = parseInt(this.dataset.index);
+
+                if (type !== this.dataset.type) return false;
+
+                if (type === 'cook') {
+                    const list = appData.cooking[0].items;
+                    if (srcIdx < 0 || srcIdx >= list.length) return false;
+
+                    const [srcItem] = list.splice(srcIdx, 1);
+                    // 단순 삽입: 아래로 드래그 시 타겟 뒤에, 위로 드래그 시 타겟 앞에 자연스럽게 배치됨
+                    list.splice(targetIdx, 0, srcItem);
+                } else {
+                    const list = type === 'shop' ? appData.shopping : (type === 'week' ? appData.weekly : appData.daily);
+                    const srcGroup = list.find(g => g.village === srcVillage);
+                    const targetGroup = list.find(g => g.village === targetVillage);
+
+                    if (!srcGroup || !targetGroup) return false;
+
+                    const [srcItem] = srcGroup.items.splice(srcIdx, 1);
+
+                    if (srcGroup === targetGroup) {
+                        targetGroup.items.splice(targetIdx, 0, srcItem);
+                    } else {
+                        // 다른 그룹으로 이동
+                        targetGroup.items.splice(targetIdx, 0, srcItem);
+                        // 빈 그룹 정리
+                        if (srcGroup.items.length === 0) {
+                            const grpIdx = list.indexOf(srcGroup);
+                            if (grpIdx > -1) list.splice(grpIdx, 1);
+                        }
+                    }
+                }
+
+                saveData();
+                refreshAll();
+            }
+            return false;
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            const rows = document.querySelectorAll('tr');
+            rows.forEach(row => row.classList.remove('drag-over'));
+        }
+
+        // --- 확인 모달 로직 ---
+        let confirmCallback = null;
+        function showConfirm(msg, callback) {
+            document.getElementById('confirm-msg').innerText = msg;
+            confirmCallback = callback;
+            document.getElementById('confirm-modal').classList.add('open');
+            document.getElementById('confirm-ok-btn').onclick = function () {
+                if (confirmCallback) confirmCallback();
+                closeConfirmModal();
+            };
+        }
+        function closeConfirmModal() {
+            document.getElementById('confirm-modal').classList.remove('open');
+            confirmCallback = null;
+        }
+
+        init();
+    </script>
+
+</body>
+
+</html>
