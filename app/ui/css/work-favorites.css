@@ -1,0 +1,12 @@
+/* Keep the first column's existing grid slot: the star does not select a task. */
+#drawer .dw-r .work-favorite{display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:28px;padding:0;background:transparent;border:0;color:var(--sub);font-size:20px;line-height:1;cursor:pointer;align-self:center}
+#drawer .dw-r .work-favorite.on{color:var(--gold)}
+#drawer .dw-r .work-favorite:hover{background:var(--goldwash);border-radius:6px}
+#drawer .dw-r .work-favorite:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+#drawer .dw-r .work-favorite:disabled{opacity:.5;cursor:wait}
+#drawer .dw-top{flex-wrap:wrap}
+#drawer #dwSkills{display:flex;flex:1 1 100%;flex-wrap:nowrap;gap:4px;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+#drawer #dwSkills [data-work-category],#drawer #dwWorkFavorites{font-size:var(--fs-xs);white-space:nowrap}
+#drawer #dwWorkFavorites{border-color:var(--goldline)}
+#drawer #dwWorkFavorites.on{background:var(--gold);color:var(--ongold);border-color:var(--gold)}
+#drawer #dwHd>span:first-child{white-space:nowrap;text-align:center}

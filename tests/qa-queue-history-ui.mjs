@@ -1,0 +1,41 @@
+import {fileURLToPath} from 'node:url';
+import fs from 'node:fs';
+import { chromium } from 'playwright';
+const root=fileURLToPath(new URL('../app/ui',import.meta.url));
+const browser=await chromium.launch({channel:'msedge',headless:true});
+const page=await browser.newPage();
+await page.setContent('<section id="tabQueue"></section>');
+await page.evaluate(()=>{
+  window.calls=[];window.refreshes=0;
+  window.MW={refreshQueue:async()=>window.refreshes++,api:async(path,body)=>{
+    window.calls.push({path,body});
+    return body ? {ok:true,retried:['a'],skipped:[{id:'b'}]} : {ok:true,items:[{t:1234,kind:'error',name:'<script>',msg:'재료 부족 <script>',recovery:{message:'원인을 해결한 뒤 대기로 옮겨주세요.'}}]};
+  }};
+});
+await page.addStyleTag({content:fs.readFileSync(root+'/css/queue-history.css','utf8')});
+const script=fs.readFileSync(root+'/js/queue-history.js','utf8');
+await page.addScriptTag({content:script});
+await page.waitForTimeout(1100);
+if(await page.evaluate(()=>calls.length)!==0)throw Error('Collapsed history made network request');
+await page.locator('summary').click();
+await page.getByText('재료 부족 <script>',{exact:true}).waitFor();
+await page.getByRole('button',{name:'실패 항목 대기로'}).click();
+await page.getByText(/1개를 대기로/).waitFor();
+if(await page.evaluate(()=>refreshes)!==1)throw Error('Queue not refreshed');
+await page.addScriptTag({content:script});
+if(await page.locator('#queueHistory').count()!==1)throw Error('Duplicate module mounts');
+await page.evaluate(()=>{
+ const original=MW.api;
+ MW.api=async(path,body)=>path==='/api/settings'?(body?(calls.push({path,body}),{ok:true,settings:body.settings}):{ok:true,settings:{connector_break_experiment:false,connector_break_interval_min:45,connector_break_rest_sec:300}}):original(path,body);
+});
+page.once('dialog',d=>d.accept());
+await page.getByRole('button',{name:'자동 휴식 실험 켜기/끄기'}).click();
+await page.getByText(/전체 통신 휴식 실험 켜짐/).waitFor();
+if(!await page.evaluate(()=>calls.some(c=>c.path==='/api/settings'&&c.body.settings.connector_break_experiment===true&&!Object.hasOwn(c.body.settings,'connector_break_interval_min')&&!Object.hasOwn(c.body.settings,'connector_break_rest_sec'))))throw Error('Toggle must preserve saved interval and rest');
+fs.mkdirSync('test-results',{recursive:true});await page.screenshot({path:'test-results/connector-break.png'});
+await page.locator('summary').click();
+const before=await page.evaluate(()=>calls.length);
+await page.waitForTimeout(1100);
+if(await page.evaluate(()=>calls.length)!==before)throw Error('Collapsed history made network request');
+console.log('PASS lazy history, escaped text, recovery guidance, retry POST and refresh, no duplicate mount, no collapsed polling');
+await browser.close();

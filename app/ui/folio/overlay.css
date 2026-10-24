@@ -1,0 +1,9 @@
+/* Original MobiFolio components, presented as three overlay states. */
+#brandrow{display:none!important}
+#rail,#railBtn{display:none!important}
+body.has-rail{padding-left:0!important}
+/* Keep the library behind the original animated, bottom-anchored sheet. */
+body #sheet{height:min(330px,calc(100% - 96px));max-height:calc(100% - 96px)}
+body[data-music-view="expanded"] #sbody{min-height:0}
+/* Selection sheets still work above the compact player. */
+body #isheet,body #csheet,body #dsheet{max-height:calc(100% - 8px)}

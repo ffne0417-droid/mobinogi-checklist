@@ -1,0 +1,10 @@
+{
+  "overlay_enabled": true,
+  "overlay_follow_game": true,
+  "overlay_auto_collect": false,
+  "queue_precheck": true,
+  "remote_on": false,
+  "connector_break_experiment": false,
+  "connector_break_interval_min": 45,
+  "connector_break_rest_sec": 300
+}

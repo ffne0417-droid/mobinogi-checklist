@@ -1,0 +1,24 @@
+# Personal state / credentials / local runtimes
+app/data-location.json
+runtime/
+python/
+node_modules/
+__pycache__/
+*.pyc
+*.log
+*.log.*
+lite.json
+settings.json
+queue.json
+queue_history.json
+connector_usage.json
+last-response.json
+*.exe
+*.dll
+*.lnk
+.env
+.env.*
+*profile*/
+backups/
+test-results/
+overlay-qa-*.png

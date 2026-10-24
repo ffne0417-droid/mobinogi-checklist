@@ -1,0 +1,76 @@
+/* Overlay-only palettes. The main apps retain their own light/dark settings.
+   The host and embedded folio receive the same data-overlay-skin attribute. */
+html[data-overlay-skin="classic"]{
+  color-scheme:light;--ov-surface:#fcfcf5;--ov-inset:#eeeee6;--ov-text:#352e20;
+  --ov-muted:#756e60;--ov-accent:#90691f;--ov-on:#fffdf8;--ov-edge:#dfd2b9;
+  --ov-line:#dcd8cd;--ov-hover:#e9e6d9;--ov-selected:#f1ecdb;
+  --ov-gold-hi:#785316;--ov-bad:#ac3554;--ov-good:#24734a;--ov-shadow:rgba(39,49,28,.16);
+  --ov-radius:12px;--ov-control-radius:7px;--ov-sheet-radius:15px;
+}
+html[data-overlay-skin="night"]{
+  color-scheme:dark;--ov-surface:#151d27;--ov-inset:#202a36;--ov-text:#edf1f5;
+  --ov-muted:#9aa8b9;--ov-accent:#d8b46a;--ov-on:#211c10;--ov-edge:#46505c;
+  --ov-line:#313d4a;--ov-hover:#293645;--ov-selected:#2c2f2c;
+  --ov-gold-hi:#edcf91;--ov-bad:#f2a1b5;--ov-good:#83d8b3;--ov-shadow:rgba(0,0,0,.32);
+  --ov-radius:12px;--ov-control-radius:7px;--ov-sheet-radius:15px;
+}
+html[data-overlay-skin="slim"]{
+  color-scheme:light;--ov-surface:#f7f8f8;--ov-inset:#e8efef;--ov-text:#263b43;
+  --ov-muted:#5f7479;--ov-accent:#346c70;--ov-on:#ffffff;--ov-edge:#c2d7d7;
+  --ov-line:#d8e2e3;--ov-hover:#dee9e9;--ov-selected:#e6eeee;
+  --ov-gold-hi:#26575b;--ov-bad:#ac3554;--ov-good:#24734a;--ov-shadow:rgba(22,63,64,.16);
+  --ov-radius:9px;--ov-control-radius:6px;--ov-sheet-radius:11px;
+}
+html:root:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]){
+  /* Main drawer tokens. */
+  --bg:var(--ov-surface);--panel:var(--ov-surface);--card:var(--ov-surface);
+  --card2:var(--ov-inset);--inset:var(--ov-inset);--soft:var(--ov-inset);
+  --hover:var(--ov-hover);--line:var(--ov-line);--line2:var(--ov-line);
+  --line3:var(--ov-edge);--scroll:var(--ov-edge);
+  --fg:var(--ov-text);--fg2:var(--ov-text);--strong:var(--ov-text);
+  --sub:var(--ov-muted);--sub2:var(--ov-muted);--faint:var(--ov-muted);
+  --faint2:var(--ov-muted);--dim:var(--ov-muted);
+  --pri:var(--ov-accent);--gold:var(--ov-accent);--gold2:var(--ov-text);
+  --gold3:var(--ov-accent);--golddim:var(--ov-accent);--goldhover:var(--ov-gold-hi);
+  --ongold:var(--ov-on);--goldOn:var(--ov-on);--goldline:var(--ov-edge);
+  --goldbg:var(--ov-selected);--goldwash:var(--ov-selected);--goldDim:var(--ov-selected);
+  --goldDimFg:var(--ov-accent);--bad:var(--ov-bad);--bad2:var(--ov-bad);--pink:var(--ov-bad);
+  --ok:var(--ov-good);--shadow:var(--ov-shadow);
+  /* Folio tokens. --mono is a font family in main, so handled separately below. */
+  --bar:var(--ov-surface);--strip:var(--ov-inset);--rowline:var(--ov-line);
+  --ctl:var(--ov-line);--dash:var(--ov-edge);--gold-hi:var(--ov-gold-hi);
+  --on-gold:var(--ov-on);--gold-dim:var(--ov-accent);--gold-badge:var(--ov-accent);
+  --gold-badge-line:var(--ov-edge);--title:var(--ov-text);--row:var(--ov-text);
+  --row-sub:var(--ov-muted);--ink:var(--ov-text);--ctl-ink:var(--ov-text);
+  --chip:var(--ov-muted);--faint3:var(--ov-muted);--bartext:var(--ov-muted);
+  --track:var(--ov-line);--play-bg:var(--ov-selected);--gold-fill:var(--ov-selected);
+  --gold-line:var(--ov-edge);
+}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]):has(#btnMain){--mono:var(--ov-muted)}
+/* Match task typography without increasing overlay window dimensions. */
+html[data-overlay-skin] body{font-size:13px}
+html[data-overlay-skin] :is(button,input,select,textarea){font-size:12px}
+html[data-overlay-skin] :is(.row .t,.irow .t){font-size:13px}
+html[data-overlay-skin] :is(.row .s,.irow .s,.chip,.chip .n,#filterrow,#q){font-size:12px}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]) :is(#drawer,#ovManagement,#ovLibrary,#ovMusic,#ovPresetReview,#ovPresetEditor){
+  border-color:var(--ov-edge);border-radius:var(--ov-radius);background:var(--ov-surface);color:var(--ov-text);
+}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]) :is(.dw-hdr,.ov-management-head,.dlg-h){
+  background:var(--ov-surface);border-bottom-color:var(--ov-line);
+}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]) :is(.dw-top,.dw-tgt,.dw-foot,.dlg-f,#ovTaskRunbar){background:var(--ov-inset)}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]) :is(button,input,select,textarea){border-radius:var(--ov-control-radius)}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]) :is(button,input,select,textarea):focus-visible{
+  outline:2px solid var(--ov-accent);outline-offset:2px;
+}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]) :is(#sheet,#isheet,#csheet,#dsheet){
+  border-radius:var(--ov-sheet-radius) var(--ov-sheet-radius) 0 0;border-top-color:var(--ov-edge);
+  box-shadow:0 -5px 20px var(--ov-shadow);background:var(--ov-surface);
+}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]) :is(#player,#instrow){background:var(--ov-inset)}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]):has(#btnMain) .row{
+  border-bottom-color:var(--ov-line);
+}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]):has(#btnMain) :is(.row.sel,.row.playing,.irow.on){background:var(--ov-selected)}
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]) .ov-shortage-items,
+html:is([data-overlay-skin="classic"],[data-overlay-skin="night"],[data-overlay-skin="slim"]) .ov-material-chip.short{color:var(--ov-bad)}

@@ -1,0 +1,14 @@
+import {fileURLToPath} from 'node:url';
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';
+const root=fileURLToPath(new URL('../app/ui',import.meta.url));
+const source=fs.readFileSync(root+'/js/overlay-observation.js','utf8');
+const c=vm.createContext({Date});vm.runInContext(source.split('(()=>{')[0],c);
+assert.match(c.connectorUsageStatus({}),/준비 중.*게임 타이머 아님/);
+assert.match(c.connectorUsageStatus({connectorUsage:{completedSeconds:125}}),/측정 시작 후.*2분 5초/);
+assert.match(c.connectorUsageStatus({connectorUsage:{completedSeconds:9999,sinceConfirmationSeconds:3}}),/직접 확인 후.*0분 3초/);
+assert.match(c.connectorUsageStatus({connectorUsage:{sinceConfirmationSeconds:3300,inFlightCount:1,inFlightSeconds:61}}),/현재 호출 대기 약 1분 1초 \(별도\).*1시간 기준 주의/);
+assert.match(c.connectorUsageStatus({connectorUsage:{incomplete:true}}),/누락\/중복 가능/);
+assert.match(c.overlayRunStatus({running:false,connectorUsage:{awaitingConfirmation:true}}),/직접 확인 필요.*진행량 유지/);
+assert(!c.connectorUsageStatus({connectorUsage:{completedSeconds:3600}}).includes('자동 재개'));
+for(const name of ['overlay-observation.js','queue-history.js'])new vm.Script(fs.readFileSync(root+'/js/'+name,'utf8'));
+console.log('PASS observed labels, unknown baseline, confirmation baseline, in-flight separated, incomplete warning, no timer/reset promise');

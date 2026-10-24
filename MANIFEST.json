@@ -1,0 +1,896 @@
+{
+  "scope": "Text source snapshot; original runtime/assets required; no personal state",
+  "files": [
+    {
+      "bytes": 310,
+      "path": ".gitignore",
+      "sha256": "d7d9cb09a91adf46c03e97c28106e0d214d3c1eda560bb3ac4e226b196dcaebc"
+    },
+    {
+      "bytes": 1409,
+      "path": "app/alterfacilities.py",
+      "sha256": "aceb5b74e42afb291ede8fc3c4e5876caa8f9c4f23c3e93ae50b9681dcb8d8e5"
+    },
+    {
+      "bytes": 3286,
+      "path": "app/appwindow.py",
+      "sha256": "5851a1bcf19fa1dcc1546c63c8f6f703f9a347ad551447c97cf6ddebd322564a"
+    },
+    {
+      "bytes": 14146,
+      "path": "app/bandpaint.py",
+      "sha256": "974f4fe6b79ecdbcb5413b6db0fc978fc655a9adee0d81f1b52dc2e1b6e2cfe2"
+    },
+    {
+      "bytes": 46411,
+      "path": "app/broadcast.py",
+      "sha256": "09f87c9c474b3252f953e67e1fb680f231e9243c2db7c5a62b891cf060437ee2"
+    },
+    {
+      "bytes": 7554,
+      "path": "app/categories.py",
+      "sha256": "f12b6e0f664e5c1415db887ea8f886a5464a430baa965e6374a66f96e2a6d758"
+    },
+    {
+      "bytes": 22525,
+      "path": "app/cli_transport.py",
+      "sha256": "c48dc00427af8e74b8fe4344f674257f8b63a9d52265761ba01fd91b0b1dec38"
+    },
+    {
+      "bytes": 1818,
+      "path": "app/connectorbreak.py",
+      "sha256": "0770e2ff3980eab4a9618e48b4ccecffbdb72ea39d441feda58c3f9c81915170"
+    },
+    {
+      "bytes": 5859,
+      "path": "app/connectorusage.py",
+      "sha256": "440a17ed1926dec639c9192bb2a636f2cdea9504833f164136753d39f79d31a1"
+    },
+    {
+      "bytes": 698306,
+      "path": "app/data/recipes.seed.json",
+      "sha256": "fb56cd0323f082bdf1e17136f1f8cb760e9b2557f565a277e3cba18242a83fa3"
+    },
+    {
+      "bytes": 2445,
+      "path": "app/datadir.py",
+      "sha256": "c3d82d96757f4b6f30b1341cbf3a50269420ff631780c7848a43229e84637836"
+    },
+    {
+      "bytes": 35441,
+      "path": "app/demo_cli.py",
+      "sha256": "7e2aa3e95e6b664945255e991142b3c0d44e81889dc2e63447b7beba6c86744a"
+    },
+    {
+      "bytes": 1173,
+      "path": "app/elevation.py",
+      "sha256": "a74d800ba9bcc70439861237d3e3a39448b9a189feb236aeed1dfd5f4b8f3053"
+    },
+    {
+      "bytes": 80,
+      "path": "app/EMBED",
+      "sha256": "787a534f16a3eb5072457c97965e5b42fff766b230eaa6ddddeb19fb02e22f80"
+    },
+    {
+      "bytes": 268780,
+      "path": "app/folio/engine.py",
+      "sha256": "edba6081047eb0fe64ddd9b8e67f93767f5f4c51c791df9d47c47c585cc944e6"
+    },
+    {
+      "bytes": 3011,
+      "path": "app/folio/identity_service.py",
+      "sha256": "934b89738ad0a5ae3ba5de9ab66a4baeaaafdb9f0765eb9c196bd8b5ddbb328c"
+    },
+    {
+      "bytes": 5798,
+      "path": "app/folio/identity.py",
+      "sha256": "657ce5e2cfb2b911ef2a0f85e7bf9022c067afeff5d54913b8315279c60317b8"
+    },
+    {
+      "bytes": 24810,
+      "path": "app/folio/library.py",
+      "sha256": "8c5e13fba7f3d4d731eb1d2380a16d676d6776f452a7fca9d7cc5148433e0d48"
+    },
+    {
+      "bytes": 21069,
+      "path": "app/folio/opening_tk.py",
+      "sha256": "a1e4cb6b59861350231854721fe7bd121ffd03ae051067fe42ddf179649b8498"
+    },
+    {
+      "bytes": 44297,
+      "path": "app/folio/opening_wv.py",
+      "sha256": "9fe3e9d2bc041b5ef15379a378974605ee5bcb33b0b2a512c6e668eaa5a74459"
+    },
+    {
+      "bytes": 144947,
+      "path": "app/folio/overlay_tk.py",
+      "sha256": "de9a02dc90b7e4a7d51fe6858b3c6a7a74706774d348f096ce0ba2bcfcb1ab5e"
+    },
+    {
+      "bytes": 5536,
+      "path": "app/game_autostart.py",
+      "sha256": "27d4c1325b4a7ac91cb44d06652333c7cc9fa8730c0d01507e563ec749951e0d"
+    },
+    {
+      "bytes": 2751,
+      "path": "app/gameclick.py",
+      "sha256": "53c805eb71b296a08e05ec31527bad25326a6c7066265f63cc7b675f347d1d8d"
+    },
+    {
+      "bytes": 4488,
+      "path": "app/inst_picker.py",
+      "sha256": "c2c8169b84eb3c6b4fafc713249906d61490827ab1d960694ce9bcab451ef05f"
+    },
+    {
+      "bytes": 12770,
+      "path": "app/ledger.py",
+      "sha256": "05bc1c5ea49a29ee8a583752c9f19a35903bb321fdb3ead56dcd7592bb191671"
+    },
+    {
+      "bytes": 5407,
+      "path": "app/mailseal.py",
+      "sha256": "87c874fd0b5b88487f1602561f74c047be510162dfce174abea0ca004f7fa5b7"
+    },
+    {
+      "bytes": 209139,
+      "path": "app/overlay.py",
+      "sha256": "a79801a5f35f9b3759d56f2d05086b7eec090c8c1b5ab914198cd887632a3966"
+    },
+    {
+      "bytes": 1598,
+      "path": "app/overlaylayouts.py",
+      "sha256": "1947b6f4726c3751192ce7701fe9d34385e3225a8c0eb01aaa86c3782f29d693"
+    },
+    {
+      "bytes": 1479,
+      "path": "app/overlayplacement.py",
+      "sha256": "9765588e4008ad1da3c2a925e7c5005642c68694d51cd41b15efff9c2b52eae9"
+    },
+    {
+      "bytes": 7462,
+      "path": "app/overlaytasks.py",
+      "sha256": "be263e8727802261dc5869d8151247f4ad58e8cdc23d64e96b1f713c34ea6afb"
+    },
+    {
+      "bytes": 23948,
+      "path": "app/paint32.py",
+      "sha256": "2cb8d87d6f9e86024357ef763ba4110c4f180e33491acb7c66fecfbb5190e770"
+    },
+    {
+      "bytes": 34079,
+      "path": "app/panelpaint.py",
+      "sha256": "2647e9410fa34e463d741bc2f460a0b65386724feb77355cc73808058a064c6b"
+    },
+    {
+      "bytes": 2760,
+      "path": "app/passivewindow.py",
+      "sha256": "935e1ff367656164a6b02c29cf4e22cf12651d9f2f12f0b8980c34651dfb9b66"
+    },
+    {
+      "bytes": 21456,
+      "path": "app/presets.py",
+      "sha256": "5dca1968050a908b7fac67348bd8396a83ad53d4762660aac21c5573d8a13d22"
+    },
+    {
+      "bytes": 9496,
+      "path": "app/questwatch.py",
+      "sha256": "2c90313bcb0c4048377e6b7cd54635f5881cd22f16fc1f1247149ffee3141309"
+    },
+    {
+      "bytes": 37617,
+      "path": "app/recipedb.py",
+      "sha256": "e3942a1e8add2d6ba12349d166160f49207d1e7741cc14a71eef578ce48a8180"
+    },
+    {
+      "bytes": 3526,
+      "path": "app/runmode.py",
+      "sha256": "e709977b8c75beab09519db63e078039336cfc1f23444bf4b31c4d1c1d58a623"
+    },
+    {
+      "bytes": 305918,
+      "path": "app/server.py",
+      "sha256": "c176f8ff1ed3737a00441312632de39931578f85262803033c0192628b920e1c"
+    },
+    {
+      "bytes": 8743,
+      "path": "app/shortcut.py",
+      "sha256": "cc56aead48f0de807e9fc603cc07432a6316a9c304a7eb3f545470463f32db12"
+    },
+    {
+      "bytes": 176148,
+      "path": "app/store.py",
+      "sha256": "3d8565cf64e0975d0d96575d3e8358274c5d02a94cd105786578430138c5c220"
+    },
+    {
+      "bytes": 15862,
+      "path": "app/taskrows.py",
+      "sha256": "535e995b8f6b37549183677950e100db2820d9b1396d16998dae7fbe8c752ac2"
+    },
+    {
+      "bytes": 1486,
+      "path": "app/transportquiet.py",
+      "sha256": "c829f95b355e26ef8cc6e690f0d6c2db34b40b1ed0b93082432dabc6c7a5ba51"
+    },
+    {
+      "bytes": 14500,
+      "path": "app/tunnel.py",
+      "sha256": "bd4943802bb0939b70e019fec93a4ecd04bfe4d45aa1d8c5585b5de2ccb6de47"
+    },
+    {
+      "bytes": 12640,
+      "path": "app/ui/css/base.css",
+      "sha256": "92a0cf750bc7e11cdb5c2017fe64c0fb3545e854ba61f8cef45db1b9abec76e1"
+    },
+    {
+      "bytes": 56211,
+      "path": "app/ui/css/board.css",
+      "sha256": "a9eab8547d48035354a96daecc739542b75369abf31c95fde7fbfa1cee7afb96"
+    },
+    {
+      "bytes": 30657,
+      "path": "app/ui/css/drawer.css",
+      "sha256": "dd4424061a8ae8460cdcc6b54cbe59e4d78b0b08e557f55f3c01ba14363de8d1"
+    },
+    {
+      "bytes": 2749,
+      "path": "app/ui/css/folio-bridge.css",
+      "sha256": "d4122de4781d1fbb2e540b1b118c97468d4e478631f62c49939a8095a2881613"
+    },
+    {
+      "bytes": 9348,
+      "path": "app/ui/css/folio-settings.css",
+      "sha256": "4d6a8e2a55230c8094f673b8a8374d35aa2657d3e9713f522b1531d949e0341d"
+    },
+    {
+      "bytes": 13300,
+      "path": "app/ui/css/group.css",
+      "sha256": "a8822a63ec80f1385e60c65e531e44a570e82af58795944788b10f3b36bb53ee"
+    },
+    {
+      "bytes": 8681,
+      "path": "app/ui/css/layout.css",
+      "sha256": "04166b94c150c2349d7307e55675a0604441a8381a75cf1297e9285f35490524"
+    },
+    {
+      "bytes": 7384,
+      "path": "app/ui/css/list.css",
+      "sha256": "7a34e0ed37c9c7108282c4272d818c74938bbb185ca87eab273ca8f1cce2d54a"
+    },
+    {
+      "bytes": 6800,
+      "path": "app/ui/css/mobile.css",
+      "sha256": "a6a21e960bda3d0f62d29bfbc6541601b51117755d9cf4067858a27156afdddc"
+    },
+    {
+      "bytes": 17758,
+      "path": "app/ui/css/overlay-compact.css",
+      "sha256": "8534d5ac2161bb132d6d92f83cb84d715eddc82a308796c2876807c71915636d"
+    },
+    {
+      "bytes": 5650,
+      "path": "app/ui/css/overlay-skins.css",
+      "sha256": "7af1341ed9433027921e737b1b971bf9b1fc7b3e47b28ab90e9c5f946dfae777"
+    },
+    {
+      "bytes": 3541,
+      "path": "app/ui/css/overlay-tab.css",
+      "sha256": "78e80cc23ea42217c4a1e7c10210f1d139c8abe6d076d06b5d65df1b72d831e8"
+    },
+    {
+      "bytes": 3687,
+      "path": "app/ui/css/plan.css",
+      "sha256": "0978d90a99d0225981686538a83545fcd14134771e801a66be45da917612ca10"
+    },
+    {
+      "bytes": 1003,
+      "path": "app/ui/css/queue-history.css",
+      "sha256": "aa39c5ab2ded61a3548be8c0f4a8a7d5bcf7463a638ee81f5db5641e87e6f98f"
+    },
+    {
+      "bytes": 12436,
+      "path": "app/ui/css/settings.css",
+      "sha256": "e4aab261ed174016a0438c3c0ea15a134936f176b64ce503d2052532ee86f22b"
+    },
+    {
+      "bytes": 11719,
+      "path": "app/ui/css/shell.css",
+      "sha256": "9de64af148e6bac7e49db9ee1e8a022a11e0346db71fa0c9b34a63087f6b4ecf"
+    },
+    {
+      "bytes": 11571,
+      "path": "app/ui/css/tab-dict.css",
+      "sha256": "fad31920b749de8937e31452724cfbd0db8efc9c0dc8573581e903102ce90f56"
+    },
+    {
+      "bytes": 4276,
+      "path": "app/ui/css/tab-gather.css",
+      "sha256": "81b723b4233f1037c9971c9f7d4c4ef8dc7d819e7e7ef4b19e3b086bb5d2bf31"
+    },
+    {
+      "bytes": 15912,
+      "path": "app/ui/css/tab-stock.css",
+      "sha256": "fe711f15731272bf9160482bb6118d295050cafcfce116eb91c6fea59b3d6ade"
+    },
+    {
+      "bytes": 6419,
+      "path": "app/ui/css/tokens.css",
+      "sha256": "ee8f933f26725657af1fcadb4608f056c99ecf360e5c1271ef968e26284b3f37"
+    },
+    {
+      "bytes": 12239,
+      "path": "app/ui/css/touch.css",
+      "sha256": "7bfff7ea5ea09d7103290f8489b309890cf828d7a03c9ea954e407bd9cca3607"
+    },
+    {
+      "bytes": 1127,
+      "path": "app/ui/css/work-favorites.css",
+      "sha256": "0654b76740c611b42de3b3c08a1918172feac37c441ae5ce9e519ac39696ffa7"
+    },
+    {
+      "bytes": 14954,
+      "path": "app/ui/css/works.css",
+      "sha256": "f7bad4f0a63882737d0f45ac29da42450fa111b0f9b30bff913b0b1370b981d4"
+    },
+    {
+      "bytes": 62,
+      "path": "app/ui/folio/app.json",
+      "sha256": "36eefae00695e7c9949e62a6bdd09c2bcb9b509a7495880453568b73b702cc33"
+    },
+    {
+      "bytes": 31691,
+      "path": "app/ui/folio/broadcast.html",
+      "sha256": "fda601705c6a68ef9467abfe2dc763dd0323c81f301753f95e564166ecf3b3f2"
+    },
+    {
+      "bytes": 2400,
+      "path": "app/ui/folio/cover-crop.css",
+      "sha256": "ff82682d589584c476a218a166c134f6091c0e30399a80951bf626edf563dafb"
+    },
+    {
+      "bytes": 9276,
+      "path": "app/ui/folio/cover-crop.js",
+      "sha256": "7c6af046eeaa067906d3b63eb63acfd41cdd15fd91473fee4454ee2e88a93a7e"
+    },
+    {
+      "bytes": 19620,
+      "path": "app/ui/folio/covers.html",
+      "sha256": "8c81f15c8657ecd649a314b59feef30c5d9ddd1fe2a81982d91b6e1e971e31ed"
+    },
+    {
+      "bytes": 568,
+      "path": "app/ui/folio/covers/default/01-sunset.svg",
+      "sha256": "127674a1b6cfbeeb5acf23486b3b1957df152cb043b9972df793be938b3d711c"
+    },
+    {
+      "bytes": 16407,
+      "path": "app/ui/folio/covers/default/02-night.svg",
+      "sha256": "2b4e539327dc8157e979765379ac0ae4d92eb6dfc4c67bd14b57223c8327134b"
+    },
+    {
+      "bytes": 3243,
+      "path": "app/ui/folio/covers/default/03-paper.svg",
+      "sha256": "e952401317faa867cc6ad67d68171c70499e9bf78001207b055c790ecdd281e2"
+    },
+    {
+      "bytes": 1302,
+      "path": "app/ui/folio/covers/default/04-stripes.svg",
+      "sha256": "0e8bab8260bfc13b96c57165cf043840b59d530cc06312ae631d4f32a2597687"
+    },
+    {
+      "bytes": 820,
+      "path": "app/ui/folio/covers/default/05-forest.svg",
+      "sha256": "25a6528ed76a73509b78a392a0c411bc2b637136ea5989340659f6920fd50de1"
+    },
+    {
+      "bytes": 373,
+      "path": "app/ui/folio/covers/default/06-ink.svg",
+      "sha256": "66f4e477756c12c36cf861fe786cbf28a734f2f01552f54b127bf99d588b8233"
+    },
+    {
+      "bytes": 338646,
+      "path": "app/ui/folio/fonts/fonts.css",
+      "sha256": "f707fa45cd069ca7daa04bab31836fa5aded6bfbe5e0b0bd23f1f5634bec10e0"
+    },
+    {
+      "bytes": 28687,
+      "path": "app/ui/folio/fonts/README.md",
+      "sha256": "876d7274882e239e976264aac6734318b3e99b87354d004adf7343e6dbdd1bd1"
+    },
+    {
+      "bytes": 45379,
+      "path": "app/ui/folio/greet.html",
+      "sha256": "40eba14ae2414b34b15c28a31c1a3362ff3e09342f3e46bd39588cab0fb18ca8"
+    },
+    {
+      "bytes": 156800,
+      "path": "app/ui/folio/index.html",
+      "sha256": "9a9f82c8b8192b4933d304e90cce3b6f3b73b5a7da9ac301310649bf620ef4d8"
+    },
+    {
+      "bytes": 4837,
+      "path": "app/ui/folio/inst_picker.js",
+      "sha256": "2cfde3553c019309e429281a0bdba0770adb09d8eb0ddd57acdb8cd2a2845a85"
+    },
+    {
+      "bytes": 2342,
+      "path": "app/ui/folio/inst.js",
+      "sha256": "4e9d067443b1fa3b218f219456b2a7793db2048adc38874b2da9f195d115040e"
+    },
+    {
+      "bytes": 580,
+      "path": "app/ui/folio/manifest.webmanifest",
+      "sha256": "e14f99254ce400614b18219a764ab5d826937ea1957cfe6b769bab917e0d10ca"
+    },
+    {
+      "bytes": 26429,
+      "path": "app/ui/folio/net.js",
+      "sha256": "22d1166e6afb47a76774251c722a89d83334d6a8fdfbc4a8b74f079fe0085473"
+    },
+    {
+      "bytes": 16466,
+      "path": "app/ui/folio/opening2.html",
+      "sha256": "2e2b7d207a348a8e250e763173c89dbeecf172e256cd36db3e3fd29c56b824ca"
+    },
+    {
+      "bytes": 521,
+      "path": "app/ui/folio/overlay.css",
+      "sha256": "87aba6f3cf4a21d315ce90909d4beca53cd0939e6ef94a8a2c07c14104715b6a"
+    },
+    {
+      "bytes": 2614,
+      "path": "app/ui/folio/overlay.js",
+      "sha256": "6398a42ec8fc7440978acf948aa7e5d097f579575802b6797d71360e249368a0"
+    },
+    {
+      "bytes": 14260,
+      "path": "app/ui/folio/qr.js",
+      "sha256": "5d8d9e0e0db407b3720b90cd075a64a4fa01479a8ea0ebe2e341e6e370ca91c0"
+    },
+    {
+      "bytes": 26631,
+      "path": "app/ui/folio/settings.html",
+      "sha256": "29626f26fb3d20423ae5d7f789dae9dd1f1081358e20f850463dd13b8de955d4"
+    },
+    {
+      "bytes": 9088,
+      "path": "app/ui/folio/themes/card/theme.css",
+      "sha256": "169e8dc11143167c99a8c62e7b1a72cd87ddf97215e4ec8126bee4c98b6240e1"
+    },
+    {
+      "bytes": 19792,
+      "path": "app/ui/folio/themes/card/theme.js",
+      "sha256": "6689ed6ee10889afa059aca42e3cd9a590e929e18bc91d50864233a28d480f79"
+    },
+    {
+      "bytes": 8297,
+      "path": "app/ui/folio/themes/film/theme.css",
+      "sha256": "abd1466cd8adfc98a4c46be9159f5412fbeaa9bad87a0591c514e62eaf219efd"
+    },
+    {
+      "bytes": 13629,
+      "path": "app/ui/folio/themes/film/theme.js",
+      "sha256": "9ba847de7bad5ff0908dc02c7eb1719cef2d8d4a579080a3615ebfdfdaddaea2"
+    },
+    {
+      "bytes": 10101,
+      "path": "app/ui/folio/themes/host.js",
+      "sha256": "1cac77825c54ce14adb67161a5364462e82b1fc7f451b05eefabef4bf56e00ff"
+    },
+    {
+      "bytes": 11552,
+      "path": "app/ui/folio/themes/phone/theme.css",
+      "sha256": "46d757c82e5fdd58545dc634415d3645c16764783f1646870c919e5fe7931d0d"
+    },
+    {
+      "bytes": 14071,
+      "path": "app/ui/folio/themes/phone/theme.js",
+      "sha256": "aded3ef25b9456db4b191b6a90ac6bbe3937bc3a94f51e59e77a7a42a4b3fa40"
+    },
+    {
+      "bytes": 10142,
+      "path": "app/ui/folio/themes/ticket/theme.css",
+      "sha256": "b4fb4ecc74f20398de63018f813cb1b8949508a6ca72bc42e72a3b432000f25b"
+    },
+    {
+      "bytes": 9360,
+      "path": "app/ui/folio/themes/ticket/theme.js",
+      "sha256": "9bdf33a9f534242b553a4eabef93f888616f7225ceae9ac8dffab12175bd603f"
+    },
+    {
+      "bytes": 6765,
+      "path": "app/ui/folio/upgrades.js",
+      "sha256": "5876d85f23ad877f253b972328e0e192106c76cd6bfd3410e7dc89af3a09cfb2"
+    },
+    {
+      "bytes": 8521,
+      "path": "app/ui/icon.svg",
+      "sha256": "9608880fa5c5246b390d50063d1cceef21f5022e606e913235cf303e5eeeff2c"
+    },
+    {
+      "bytes": 36265,
+      "path": "app/ui/index.html",
+      "sha256": "4acbe0f36be19403c17e8ac832b5ea85d9022f87d91d169d0aa2ad316e04f8f6"
+    },
+    {
+      "bytes": 135177,
+      "path": "app/ui/js/board.js",
+      "sha256": "2d99013b5cf8224d0e2063bc0923f51da90cd4f6baa36164a68e10a3fb478165"
+    },
+    {
+      "bytes": 19614,
+      "path": "app/ui/js/core.js",
+      "sha256": "7719ff3cfb87432712b22750ece777bd3c68bca39df7479bdd078f3f14fd2d72"
+    },
+    {
+      "bytes": 55916,
+      "path": "app/ui/js/drawer.js",
+      "sha256": "d05f2a4b3b6b0ada4f9d56dd17b6a4e1fd7656906272a5942e3001919a13db00"
+    },
+    {
+      "bytes": 29927,
+      "path": "app/ui/js/group.js",
+      "sha256": "7b6b753ddedbced00900353e0dd9baa9f26ef8987649b2430e523a31d94f5fe9"
+    },
+    {
+      "bytes": 1664,
+      "path": "app/ui/js/layout.js",
+      "sha256": "2b14070ad233f268cd1aa40d70cc282c804baba26efb99f1170372716eadd0d5"
+    },
+    {
+      "bytes": 15636,
+      "path": "app/ui/js/list-core.js",
+      "sha256": "0e5dccaef964276dd44acd6cb828f5952dc28d3109740031003d139627ca732e"
+    },
+    {
+      "bytes": 13877,
+      "path": "app/ui/js/main.js",
+      "sha256": "5d82951ea6573a8c21d75d585c77cf8c7a4126ab6358f46f9d39b9024b72c3b8"
+    },
+    {
+      "bytes": 20970,
+      "path": "app/ui/js/net.js",
+      "sha256": "6a51be25b3810f4a8c70d9718dbe429615a5efb5636689bc088f8ad479bf30aa"
+    },
+    {
+      "bytes": 33303,
+      "path": "app/ui/js/overlay-drawer.js",
+      "sha256": "75147acc3d6e69032c8c93a0eeb20963077efcfb326d228b037acc56a01ea867"
+    },
+    {
+      "bytes": 2213,
+      "path": "app/ui/js/overlay-layouts.js",
+      "sha256": "8cb896cf95fd5fc2059da7837e61085039b8ee9dd20849f314bfb91e4a21782d"
+    },
+    {
+      "bytes": 7002,
+      "path": "app/ui/js/overlay-observation.js",
+      "sha256": "71bd19cbfe927c6262c37a9e213da20a51dcd1e2fed60ffe63955636cdf8b753"
+    },
+    {
+      "bytes": 13959,
+      "path": "app/ui/js/overlay-preset-editor.js",
+      "sha256": "c5d8b7a38568e0e1139d248abff1ee310a9bcedbbb07da5adbedf0634fe896ec"
+    },
+    {
+      "bytes": 18230,
+      "path": "app/ui/js/overlay-tab.js",
+      "sha256": "99726efa41e94966fb9a7e3e20abf22a0b72040ec5c914bbf7063757980a2c18"
+    },
+    {
+      "bytes": 19833,
+      "path": "app/ui/js/plan.js",
+      "sha256": "9d48c4d0a3df2896e7688d5f47941e995abb2e9f1004a235f5ae0c8642c2fb8d"
+    },
+    {
+      "bytes": 7900,
+      "path": "app/ui/js/preset.js",
+      "sha256": "fd0f391f4bced00845e60103bf96e788a6f3d6dd546b694da2652e91cb61fb0d"
+    },
+    {
+      "bytes": 7429,
+      "path": "app/ui/js/queue-history.js",
+      "sha256": "86c4f386c5ac63b6ad8a00e4ec7e6c00d2d30ea87179c1dfa7d9e0805a44d793"
+    },
+    {
+      "bytes": 11484,
+      "path": "app/ui/js/remote.js",
+      "sha256": "5898ed7c23b5a6c4217c6b2df25e9c666bb7a3e4a0a3306cb50966afadb81929"
+    },
+    {
+      "bytes": 22290,
+      "path": "app/ui/js/settings.js",
+      "sha256": "d805bdef44e77b26a99056942d230e2bbc89d343dba6dbed4cc559ffddd0c10e"
+    },
+    {
+      "bytes": 37311,
+      "path": "app/ui/js/shell.js",
+      "sha256": "aeceb813ba0e6cfd8be2e9c9b1e78d09bf72f01f3ba8a0391e9d9eddc0831c48"
+    },
+    {
+      "bytes": 2853,
+      "path": "app/ui/js/tab-craft.js",
+      "sha256": "660ba4c2814f8a908b8c3e615d93fd567c678f26fbfe1d1b0e67106a47ae1080"
+    },
+    {
+      "bytes": 18688,
+      "path": "app/ui/js/tab-dict.js",
+      "sha256": "9f9ffc0582a5fe6ebc61ee5b48afe7d3284ee7ddaa663fa19859b30284986c74"
+    },
+    {
+      "bytes": 6811,
+      "path": "app/ui/js/tab-gather.js",
+      "sha256": "a2f88a18080409aade6d65731418c09f6ed7d01951e4cfaf345aa41cae9df6f3"
+    },
+    {
+      "bytes": 23793,
+      "path": "app/ui/js/tab-stock.js",
+      "sha256": "91721817ab68a585729c7f29d05168cb4a2a8afe478689abb34036c3955db202"
+    },
+    {
+      "bytes": 8402,
+      "path": "app/ui/js/theme.js",
+      "sha256": "6d2626f0979e488448a32be51375d99c5ec058df83f1191710e6a1646f9d227b"
+    },
+    {
+      "bytes": 4296,
+      "path": "app/ui/js/update.js",
+      "sha256": "37d81bce06ba9accfa7be7fcd99e9c9d1d913c4e7e309cd8164fcf96e6971167"
+    },
+    {
+      "bytes": 4500,
+      "path": "app/ui/js/work-favorites.js",
+      "sha256": "45427962c3168b47382397ec352b979db0037bd9d4b6aa333e5a158adf4168d6"
+    },
+    {
+      "bytes": 16258,
+      "path": "app/ui/js/works.js",
+      "sha256": "e110aee5fc1517ef5dd363b4df814162d5a8ef34b0766948900eed7bcf6bf050"
+    },
+    {
+      "bytes": 4537,
+      "path": "app/ui/live/index.html",
+      "sha256": "46bcf899903fd43ad669ea12631d6a3aef2d7e114e3f984508eb6a7437dd9ae9"
+    },
+    {
+      "bytes": 14984,
+      "path": "app/ui/live/live.css",
+      "sha256": "eb4b0a57801ec2f416975fee4035ff41fc1eb26dbd9698feabcd92152a2750c2"
+    },
+    {
+      "bytes": 24302,
+      "path": "app/ui/live/live.js",
+      "sha256": "d6f7a084a6ee2164be8a2055ab189151cf97235d99b9673812f4168f040a84a3"
+    },
+    {
+      "bytes": 626,
+      "path": "app/ui/manifest.webmanifest",
+      "sha256": "a1165dc48c12d00e31f23c45c978f6d898d80e441854d7bd13ec730ff9e1df58"
+    },
+    {
+      "bytes": 11411,
+      "path": "app/ui/seal.js",
+      "sha256": "c57dcf8a9524b7867a4558de652fe696267c6abf39de064d731016c34973f877"
+    },
+    {
+      "bytes": 4541,
+      "path": "app/ui/sw.js",
+      "sha256": "c43352072ba64a1c480fd284fc6e956083d2f15ce6f4cdf14021b066a82f64d2"
+    },
+    {
+      "bytes": 25860,
+      "path": "app/updater.py",
+      "sha256": "502487fa695b29f7d59fc4afb5455bbcc84a8dff3d4b58bea660bb20b9b62696"
+    },
+    {
+      "bytes": 1487,
+      "path": "app/vendor/LICENSE-WebView2.txt",
+      "sha256": "0af8f1b807512aae39c2ac1aa4d0cae65cabecb6fd554b8439a5162a0d6eca55"
+    },
+    {
+      "bytes": 34275,
+      "path": "app/viewmodel.py",
+      "sha256": "549ecb8eaac960e5a718a37d41d9244e9fdeba495e4608e87233047338ec29be"
+    },
+    {
+      "bytes": 17337,
+      "path": "app/webdrawer.py",
+      "sha256": "157279a3a826fc952fa625f81ecba9b112221dc035c80bf12fc66214abceae63"
+    },
+    {
+      "bytes": 15718,
+      "path": "app/work.py",
+      "sha256": "4383ae3ebc164bcc760dafcef99d41896437c6acc81f807ccd219d931a3d11de"
+    },
+    {
+      "bytes": 23719,
+      "path": "app/workdrawer.py",
+      "sha256": "1fd9cd92c3c3cdbdc885126b041f34e0626c8d4a78d8990fa1aa5979ae31d6f2"
+    },
+    {
+      "bytes": 1260,
+      "path": "app/workfavorites.py",
+      "sha256": "339fab67d11bfe68612da980655ab0e43f80bf5ed11bd225371f4ad17288a8c9"
+    },
+    {
+      "bytes": 348997,
+      "path": "app/workqueue.py",
+      "sha256": "4f2445d4ae4c9d22c19e9f0510f1f948c6afc0b4c607f5eceaee72dde732b771"
+    },
+    {
+      "bytes": 33,
+      "path": "config/data-location.example.json",
+      "sha256": "d6dc512c3aa271e221208f63cdb879facea28d051e5e052b91bfc1c342095777"
+    },
+    {
+      "bytes": 254,
+      "path": "config/settings.example.json",
+      "sha256": "d4e6fddc6e9f98a34b5fb84437ad95153e41eb92ab768e295b6c11cc24e07119"
+    },
+    {
+      "bytes": 1470,
+      "path": "diagnostics/InputPrivilegeProbe.cs",
+      "sha256": "4da57c9043c79d2a81c358fabfc9c500dae3d6430a5206376431301f26e8d486"
+    },
+    {
+      "bytes": 6508,
+      "path": "diagnostics/MouseInputMonitor.cs",
+      "sha256": "53c28b52ca2741ee6189be59e8d20b319da0724759ac8956604933476a6e0d5e"
+    },
+    {
+      "bytes": 976,
+      "path": "diagnostics/README.md",
+      "sha256": "f5b2dc7d88a4c70926ccc569d806a849f6a07515d25afba54ca6a0d2e035a33d"
+    },
+    {
+      "bytes": 4546,
+      "path": "docs/01-architecture.md",
+      "sha256": "c96a28ae8ab629fc9630dcd752aae57a59093fa745dd9ac33cc744527701789d"
+    },
+    {
+      "bytes": 4672,
+      "path": "docs/02-setup.md",
+      "sha256": "8e6300f9d0fe5f25e13d4d31b8e2ba4fb676ea14b6949ad6992661ed20c69685"
+    },
+    {
+      "bytes": 5055,
+      "path": "docs/03-operations.md",
+      "sha256": "0a689055c98ebf94b7ea15072bed312e5cc7ba96fa83745471129791cfcacf3a"
+    },
+    {
+      "bytes": 4730,
+      "path": "docs/04-connector-research.md",
+      "sha256": "57233e6c03f4b798709fe97ac5b45c95b8234c09daa6bc426950c05fa3b5e378"
+    },
+    {
+      "bytes": 3722,
+      "path": "docs/05-changes.md",
+      "sha256": "2b141305de0850a70a1249bff1eb44aa64800d18580b2d33845b062d60236467"
+    },
+    {
+      "bytes": 4249,
+      "path": "docs/06-verification.md",
+      "sha256": "03057dba3e0c243010a8a10f20c3a6578062cf1c15b8294d4f9d96313e7de973"
+    },
+    {
+      "bytes": 3708,
+      "path": "docs/07-security-transfer.md",
+      "sha256": "a3af041157f7067837533ecab691292cade2a0c23a91a6394a185fcd1c8dc96b"
+    },
+    {
+      "bytes": 3047,
+      "path": "docs/08-input-experiments.md",
+      "sha256": "47405b38c9730566305afb21a0c2e2eb9739cbfb588dab2595043a53166143b9"
+    },
+    {
+      "bytes": 280,
+      "path": "package.json",
+      "sha256": "7bd06deb03f9b1c3b2d73d647d394826766a0a1974fc671dc5f769a46b2d099a"
+    },
+    {
+      "bytes": 3324,
+      "path": "README.md",
+      "sha256": "4457200fe0deff50b9c0319a4bcba23721567dde5cc0f123d0034547a0494c28"
+    },
+    {
+      "bytes": 1734,
+      "path": "scripts/Install-ApprovedLauncher.ps1",
+      "sha256": "048c7b6188b1ad04473ea95371ce1771fab33c42ad2aba7d4116001674c84c15"
+    },
+    {
+      "bytes": 2647,
+      "path": "scripts/Install-OverlaySources.ps1",
+      "sha256": "917474bad113b5b0ac78719200cd31d22fd83ddb54770645ec042233c9b9a262"
+    },
+    {
+      "bytes": 1157,
+      "path": "scripts/Set-DataLocation.ps1",
+      "sha256": "7304400ec1a95bdf9fff82acaab83de22aa7993f0a195a6724e2b2dfea936506"
+    },
+    {
+      "bytes": 585,
+      "path": "scripts/Start-Overlay.ps1",
+      "sha256": "b805e9cf79e23e3b7413621850d5f64bbc9d57e173d6eea01c564933307de3e7"
+    },
+    {
+      "bytes": 1285,
+      "path": "scripts/Test-Snapshot.ps1",
+      "sha256": "ffffccf73e175c44e9daf070b410e4d4492c534a493f8fee9f1c87f6a5246720"
+    },
+    {
+      "bytes": 1337,
+      "path": "SOURCE-NOTES.md",
+      "sha256": "2dea70ff856565eb32dc0c688dc179a70d711fb2f7478c5e4a5be4e42b8c052d"
+    },
+    {
+      "bytes": 1909,
+      "path": "tests/qa-connector-break.py",
+      "sha256": "e1e34281d2b78e341340307d178531250226a107efeb43fa1022cc20ca540ae6"
+    },
+    {
+      "bytes": 1022,
+      "path": "tests/qa-connector-limit.py",
+      "sha256": "9674985eb1a2b079864c94d343c89c4b55f526bbb13e0f34f72ee82018b38325"
+    },
+    {
+      "bytes": 1466,
+      "path": "tests/qa-connector-usage-ui.mjs",
+      "sha256": "5eeba699ab78926b92b1cf383f687dcabff1753f19ee57d52e8ba38ac034cf1c"
+    },
+    {
+      "bytes": 5022,
+      "path": "tests/qa-connector-usage.py",
+      "sha256": "d21f0736e373b5fd26661b3939526c496c91bba04d7beff6d2e91c1cf0f418f5"
+    },
+    {
+      "bytes": 975,
+      "path": "tests/qa-food-categories.py",
+      "sha256": "4b975e607deae5606457f6f18862e8465aed72937936380cb1530070cc137218"
+    },
+    {
+      "bytes": 1130,
+      "path": "tests/qa-music-favorites.py",
+      "sha256": "6e8b421503d3eadf9c91d949109cb3907c7ed09dd1dac295894233c2d8fefb7b"
+    },
+    {
+      "bytes": 1508,
+      "path": "tests/qa-observation-state.mjs",
+      "sha256": "36340b59cae4db80a4f081dfaebe6114be1161305adee5f2ecd5a9f9d37de63b"
+    },
+    {
+      "bytes": 3298,
+      "path": "tests/qa-preset-prepare.py",
+      "sha256": "6beb3612aa7f87ba172cfa42622dc31ffcc204099d2f8dc98536325bdb210242"
+    },
+    {
+      "bytes": 2883,
+      "path": "tests/qa-queue-history-retry.py",
+      "sha256": "87513792b75d024b3bd44a079e1eaba63ec54614c7c60a7e33c07e9aea34b591"
+    },
+    {
+      "bytes": 2820,
+      "path": "tests/qa-queue-history-ui.mjs",
+      "sha256": "88184145a0ae41e29037cb7ba730aab23d76c50bb9bd11ec420836d93acdf60b"
+    },
+    {
+      "bytes": 1796,
+      "path": "tests/qa-transport-quiet.py",
+      "sha256": "50a408c4b9c0634f845648a04cd9682694234eb016b86592d64a78dac1e12233"
+    },
+    {
+      "bytes": 1916,
+      "path": "tests/qa-upgrade-backends.py",
+      "sha256": "a46b3d36c5a4b43faf5e25fa43f88355e6d6ab186bca0196f1c6747128281b5b"
+    },
+    {
+      "bytes": 1863,
+      "path": "tests/qa-work-favorites.py",
+      "sha256": "a56bba0999976fbec6d7feba0d504fb06b85319251bfd3a2e34af1fd25c8440b"
+    },
+    {
+      "bytes": 3659,
+      "path": "tools/analyze-connector-log.py",
+      "sha256": "23ca67282948c76764527ad24e78ae4011a1ea07f7d011e122d9a663aff0cf27"
+    }
+  ],
+  "snapshot": "2026-10-24"
+}

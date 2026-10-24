@@ -1,0 +1,225 @@
+/* Only dimensions/spacing: components, colours and behaviours are drawer.css. */
+html,body{width:100%;height:100%;margin:0;overflow:hidden}
+html[data-theme="dark"] .ov-shortage-title,html[data-theme="dark"] .ov-shortage-items,html[data-theme="dark"] .ov-material-chip.short{color:var(--bad)}
+/* Shared window actions: same typography and hit area across every view. */
+#drawer #dwEsc,#ovManagement #ovManagementClose,#ovLibrary #ovLibraryClose,
+#ovMusic #ovMusicClose,
+#drawer #ovQueueStart,#drawer #ovQueueStop,#ovManagement #rbStart,#ovManagement #rbStop{
+  font-family:var(--font,inherit)!important;font-size:var(--fs-body)!important;
+  line-height:18px!important;height:34px!important;box-sizing:border-box;
+  padding:7px 12px!important;border-radius:7px;
+}
+#drawer #dwEsc .esck{font:inherit!important;color:inherit}
+.ov-resize-handle{position:absolute!important;right:1px;bottom:1px;width:22px;height:22px;padding:0!important;border:0!important;background:transparent!important;color:var(--sub)!important;cursor:nwse-resize;z-index:20;touch-action:none;font-size:17px;line-height:22px}
+.ov-resize-handle:hover,.ov-resize-handle:focus-visible{color:var(--fg)!important;background:var(--inset)!important}
+#drawer .dw-foot{padding-right:28px!important}
+@media(max-width:780px){#drawer .dw-body{overflow-x:auto}#drawer .dw-r,#drawer .dw-hd{min-width:800px}#drawer .dw-top{gap:5px}#drawer .dw-search{width:180px}}
+#ovManagement #boardFoot{padding-right:28px!important}
+#ovManagement{inset:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;padding:0;box-sizing:border-box;border:1px solid var(--line3);border-radius:9px;background:var(--card);color:var(--fg);overflow:hidden}
+#ovManagement[open]{display:flex;flex-direction:column}
+.ov-management-head{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:1px solid var(--line)}
+.ov-management-head .muted{flex:1;min-width:0;font-size:var(--fs-sm)}
+.ov-management-head button{white-space:nowrap}
+#ovManagement #runbar{display:flex!important;padding:7px 10px;gap:7px;flex-wrap:wrap;overflow:visible}
+#ovManagement #tabQueue{display:flex!important;flex-direction:column;flex:1 1 0;min-height:0;overflow:hidden}
+#ovManagement>.ov-management-head{height:auto;min-height:49px;flex:0 0 auto}
+#ovManagement>#runbar{flex:0 0 auto;align-items:center;min-height:48px;box-sizing:border-box}
+#ovManagement #board{flex:1 1 0;min-height:0}
+#ovManagement #boardFoot,#ovManagement #bsegs{flex:0 0 auto}
+#ovManagement #boardFoot{flex-wrap:wrap;overflow:visible}
+#ovManagement #boardFoot .srch{flex:1 1 160px;min-width:100px;width:auto}
+#ovManagement #board{padding:8px;gap:8px}
+#ovManagement #boardFoot{padding:5px 8px}
+#ovManagement #boardFoot .bnote{display:none}
+#ovLibrary{inset:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;padding:0;box-sizing:border-box;border:1px solid var(--line3);border-radius:9px;background:var(--card);color:var(--fg);overflow:hidden}
+#ovLibrary[open]{display:grid;grid-template-rows:auto minmax(0,1fr)}
+.ov-library-body{overflow:auto;min-height:0;padding:8px 10px 25px}
+.ov-library-body>section[hidden]{display:none!important}
+.ov-library-body>section:not([hidden]){display:flex;flex-direction:column;min-height:0}
+#ovLibrary #tabCard{overflow:visible;min-height:0}
+#ovLibrary #tabBody{overflow:visible;max-height:none}
+#ovLibrary #tabOverlay,#ovLibrary #tabSettings{overflow:visible}
+#ovMusic{inset:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;padding:0;box-sizing:border-box;border:1px solid var(--line3);border-radius:9px;background:var(--card);color:var(--fg);overflow:hidden}
+#ovMusic[open]{display:grid;grid-template-rows:49px minmax(0,1fr)}
+#ovMusic iframe{width:100%;height:100%;min-height:0;border:0;display:block}
+#ovSettingsTabs[hidden]{display:none}
+body>header,body>main,body>footer,body>.shell,body>#rail{display:none!important}
+#drawer{inset:0!important;width:100%!important;height:100%!important;max-height:none!important;
+  max-width:none!important;margin:0!important;border:1px solid var(--line3);border-radius:9px;box-sizing:border-box}
+#drawer[open]{grid-template-rows:auto auto auto auto auto minmax(0,1fr) auto}
+#drawer[open]:has(#dwHd[hidden]){grid-template-rows:auto auto auto auto minmax(0,1fr) auto}
+#drawer .dw-grip{display:none}
+#drawer .dw-hdr,.ov-management-head{height:49px;min-height:49px;box-sizing:border-box;padding:7px 10px;gap:10px;border-bottom:1px solid var(--line);background:var(--card)}
+#drawer .dw-hdr .dw-x{font-family:inherit;font-size:var(--fs-sm);padding:7px 12px}
+#drawer .ov-task-runbar{display:flex;align-items:center;padding:7px 10px;gap:7px;flex-wrap:wrap;background:var(--bg);border-bottom:1px solid var(--line);box-sizing:border-box;min-height:49px}
+#drawer .ov-task-runbar #ovQueueStart,#drawer .ov-task-runbar #ovQueueStop{padding:7px 12px;font-size:var(--fs-sm)}
+.ov-work-tabs{flex:none}
+.ov-work-tabs button+button{border-left:1px solid var(--line2)}
+#drawer .dw-top{padding:9px 10px;gap:8px;flex-wrap:wrap}
+#drawer .dw-search{width:245px;min-width:0;padding:6px 9px}
+#drawer .dw-seg button{padding:4px 7px}
+#drawer .dw-tgt{padding:8px 10px;gap:6px}
+#drawer .dw-tgts{max-width:52%}
+#drawer .dw-tgts button{padding:5px 9px}
+#drawer .dw-hd,#drawer .dw-r{grid-template-columns:32px minmax(160px,1.1fr) minmax(105px,.7fr) minmax(160px,1.3fr) 192px;gap:7px;padding-left:10px;padding-right:10px;min-width:0}
+#drawer .dw-hd>.per,#drawer .dw-r>.per{display:none}
+#drawer .dw-r,#drawer .dw-r.k-alter{height:auto;min-height:70px;padding-top:10px;padding-bottom:10px;box-sizing:border-box}
+#drawer .dw-r .nm b{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px;white-space:normal;overflow:visible;overflow-wrap:anywhere}
+#drawer .dw-r .nm .x{display:inline-flex;flex:none;font-style:normal;font-size:var(--fs-xs);font-weight:400;color:var(--sub);white-space:nowrap}
+#drawer .dw-r .nm i{white-space:normal;overflow:visible;overflow-wrap:anywhere}
+#drawer .dw-r .dwst{overflow:visible}
+#drawer .dw-r .dwst .badge{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.4;max-width:100%;box-sizing:border-box}
+#drawer .dw-r .mats{flex-wrap:wrap;overflow:visible;min-width:0}
+#drawer .dw-r .mat{max-width:100%;box-sizing:border-box;white-space:normal;overflow-wrap:anywhere;flex-wrap:wrap}
+#drawer .dw-r .dw-q{min-width:0}
+#drawer .dw-q,#drawer .dw-hd .qh{grid-template-columns:98px 28px 52px;gap:7px}
+#drawer .dw-hd>span:nth-child(5){white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#drawer .dw-q .stepper{grid-template-columns:25px 46px 25px;width:98px}
+#drawer .dw-q .dwmode,#drawer .dw-q .cq{width:98px}
+#drawer .dw-q .go{width:52px}
+#drawer .dw-r .mat{padding:2px 5px;gap:3px}
+#drawer .dw-foot{padding:8px 10px;gap:7px}
+#drawer .dw-foot .info{flex:1}
+#drawer .dw-foot .cnt{display:none}
+#drawer .dw-foot .pri{padding:6px 12px}
+#drawer .dw-skills:empty{display:none}
+#drawer .dw-skills:not(:empty){flex:1 0 100%;overflow-x:auto;scrollbar-width:thin}
+#drawer .dw-skills button{flex:none}
+#drawer .dw-tgts{max-width:none;overflow:visible;flex-wrap:wrap}
+#drawer .ov-group{position:relative;display:inline-flex;min-width:0}
+#drawer .ov-group>[data-t]{padding:5px 9px;max-width:190px;overflow:hidden;text-overflow:ellipsis}
+#drawer .ov-group-actions{position:absolute;right:1px;top:-8px;display:flex;gap:1px;visibility:hidden;z-index:2}
+#drawer .ov-group.selected .ov-group-actions,#drawer .ov-group:hover .ov-group-actions,#drawer .ov-group:focus-within .ov-group-actions{visibility:visible}
+#drawer .ov-group-actions button{padding:0;width:14px;height:14px;font-size:12px;line-height:12px;color:var(--fg);background:var(--card,#fff);border:1px solid var(--line2);border-radius:3px;box-shadow:0 1px 2px #0002}
+#drawer .ov-group.selected .ov-group-actions button{background:var(--card,#fff);color:var(--gold)}
+#drawer .dw-tgt{flex-wrap:wrap}
+.ov-presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;flex:1 0 100%;min-width:0;border-top:1px solid var(--line);padding-top:7px}
+.ov-preset-list{display:flex;gap:2px;overflow-x:auto;min-width:0;max-width:60%;scrollbar-width:thin}
+.ov-presets button{font-size:var(--fs-sm);padding:4px 8px;white-space:nowrap}
+.ov-preset-list button{border:0;background:var(--inset);max-width:190px;overflow:hidden;text-overflow:ellipsis}
+.ov-preset-list button.on{background:var(--gold);color:var(--ongold)}
+.ov-preset-error{flex-basis:100%;color:var(--bad);white-space:normal}
+#ovPresetDialog{width:430px;max-width:calc(100% - 24px);background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:0}
+#ovPresetDialog .dlg-b{padding:12px}
+#ovPresetName{width:100%;box-sizing:border-box}
+#ovPresetSaveError{color:var(--bad)}
+#drawer .dw-tgt>.lb,#ovPresets>.lb{display:inline-flex;align-items:center;justify-content:space-between;flex:0 0 58px}
+#drawer .dw-tgt>.lb::after,#ovPresets>.lb::after{content:'|';color:var(--sub);padding-left:8px}
+#drawer #dwTgts .new,#drawer #ovPresets>.new{border:0;border-radius:0;background:var(--inset);color:var(--gold);padding:5px 9px;font-size:var(--fs-sm)}
+.ov-preset-list{overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;flex:1 1 0;max-width:none;padding-top:9px;padding-bottom:3px;margin-top:-9px;margin-bottom:-3px;cursor:grab;user-select:none;touch-action:pan-y;scrollbar-width:none}
+.ov-preset-list::-webkit-scrollbar{display:none}
+#drawer .ov-preset-list .ov-group{flex:0 0 auto}
+.ov-preset-list.dragging,.ov-preset-list.dragging button{cursor:grabbing}
+.ov-preset-list button.ov-reordering{opacity:.55;outline:2px solid var(--gold);cursor:grabbing}
+.ov-preset-list button.ov-drop-before{box-shadow:inset 3px 0 var(--gold)}
+.ov-preset-list button.ov-drop-after{box-shadow:inset -3px 0 var(--gold)}
+#ovPresets>.new,#ovPresetLoad{flex-shrink:0}
+#ovPresets>.grow{display:none}
+.ov-preset-list .ov-group>button{padding:5px 9px}
+#ovPresetEditor{width:min(700px,96vw);max-height:calc(100vh - 16px);background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:0}
+#ovPresetEditor .dlg-h{gap:8px}
+#ovEditName{flex:1;min-width:0}
+#ovPresetEditor .dlg-b{padding:10px;overflow:auto}
+.ov-edit-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.ov-edit-toolbar>span:first-child,.ov-edit-toolbar>b:first-child{flex:1}
+.ov-edit-toolbar input{width:54px}
+.ov-edit-group{border:1px solid var(--line);border-radius:8px;padding:8px;margin:8px 0}
+.ov-edit-row{display:grid;grid-template-columns:42px minmax(90px,1fr) 65px 20px 105px 25px 25px 25px;align-items:center;gap:5px;padding:7px 0;border-bottom:1px solid var(--line)}
+.ov-edit-row>b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.ov-edit-row input,.ov-edit-row select{width:100%;min-width:0;box-sizing:border-box}
+.ov-edit-row button{padding:3px}
+#ovEditError{color:var(--bad);margin-bottom:0}
+#drawer.ov-preset-picking .dw-chain,#drawer.ov-preset-picking #ovPresets,#drawer.ov-preset-picking #dwNew{display:none!important}
+.ov-preset-destination{padding:5px 9px;color:var(--gold)}
+#ovQueueStart,#ovQueueStop{padding:6px 12px;white-space:nowrap}
+#ovQueueStop:not(:disabled){background:var(--bad);color:var(--card)}
+#drawer.ov-preset-picking #ovQueueStart,#drawer.ov-preset-picking #ovQueueStop{display:none}
+.ov-edit-item{border-bottom:1px solid var(--line);padding-bottom:6px}
+.ov-edit-item .ov-edit-row{border-bottom:0}
+.ov-material-chips{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:var(--fs-sm)}
+.ov-material-chips:empty{display:none}
+.ov-material-chip{border:1px solid var(--line);border-radius:4px;padding:2px 5px;color:var(--sub)}
+.ov-material-chip.short,.ov-material-status.short{color:var(--bad);background:var(--badwash,var(--inset))}
+.ov-material-status{padding:2px 5px;border-radius:4px;white-space:nowrap}
+.ov-material-status.enough{color:var(--ok);background:var(--okwash,var(--inset))}
+.ov-material-status.unknown,.ov-material-chip.unknown{color:var(--sub)}
+#ovMaterialSummary{padding:7px 0;border-bottom:1px solid var(--line);font-size:var(--fs-sm)}
+#ovMaterialSummary summary{cursor:pointer;font-weight:600}
+#ovMaterialSummary .ov-material-chips{margin:5px 0}
+#ovMaterialSummary>.muted{display:block;margin-top:4px}
+.ov-shortage-title,.ov-shortage-items,.ov-material-chip.short{color:#c43b47}
+.ov-shortage-line{display:flex;align-items:baseline;gap:8px;margin:4px 0 0 12px;font-weight:400}
+.ov-shortage-line>span:first-child{flex:0 0 86px;white-space:nowrap}
+.ov-shortage-items{display:flex;flex-wrap:wrap;gap:3px 5px;min-width:0}
+.ov-shortage-items>span,.ov-material-chip{white-space:nowrap}
+#ovMaterialSummary>.muted{line-height:1.6;word-break:keep-all}
+.ov-total-target{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:var(--fs-sm);margin-bottom:5px}
+.ov-total-target label{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;color:var(--sub)}
+.ov-total-target input{margin:0}
+#ovPresetReview{width:min(620px,calc(100vw - 20px));max-height:calc(100vh - 20px);padding:0;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:10px}
+#ovPresetReview .dlg-b{max-height:calc(100vh - 155px);overflow:auto;line-height:1.6;overflow-wrap:anywhere}
+#ovPresetReview h3{margin:0;color:var(--gold)}
+.ov-review-items>div{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;padding:6px 0;border-bottom:1px solid var(--line)}
+.ov-review-items>div>span:last-child{color:var(--sub)}
+.ov-review-section{display:flex;flex-direction:column;gap:5px;margin-top:12px}
+.ov-review-options{padding:7px;background:var(--inset);border-radius:5px;color:var(--sub)}
+.ov-review-warnings,#ovReviewError{color:var(--bad)}
+.ov-review-warnings p{margin:3px 0}
+html[data-theme="dark"] #ovPresetReview .ov-material-chip.short{color:var(--bad2,var(--bad))}
+/* Below table width, keep controls beside the item and stack its details. */
+@media(max-width:700px){
+  #drawer .dw-hd{grid-template-columns:28px minmax(0,1fr) 168px}
+  #drawer .dw-hd>span:nth-child(4),#drawer .dw-hd>span:nth-child(5){display:none}
+  #drawer .dw-hd .qh{display:block;text-align:center}
+  #drawer .dw-hd .qh>span:not(:first-child){display:none}
+  #drawer .dw-r{grid-template-columns:28px minmax(0,1fr) 168px;column-gap:7px;row-gap:5px;align-items:start}
+  #drawer .dw-r>.kd{grid-column:1;grid-row:1/4}
+  #drawer .dw-r>.nm{grid-column:2;grid-row:1}
+  #drawer .dw-r .l2,#drawer .dw-r .tx{display:contents}
+  #drawer .dw-r .dwst{grid-column:2;grid-row:2}
+  #drawer .dw-r .mats{grid-column:2;grid-row:3}
+  #drawer .dw-r>.dw-q{grid-column:3;grid-row:1/4;align-self:center;display:grid;grid-template-columns:98px 18px 42px;gap:5px}
+  #drawer .dw-q .go{width:42px}
+  #drawer .dw-r .sep,#drawer .dw-r .sub,#drawer .dw-r .ops{display:none}
+}
+/* One compact destination/preset toolbar; menus float rather than adding rows. */
+#drawer .dw-tgt{overflow:visible;align-items:center;position:relative}
+#drawer .dw-tgt>.lb,#drawer #ovPresets>.lb{flex:0 0 auto;width:auto}
+#drawer .dw-tgt>.lb::after,#drawer #ovPresets>.lb::after{content:none}
+#drawer .dw-tgtwrap{flex:0 1 130px;min-width:90px;overflow:visible}
+#drawer .dw-tgts{display:block;overflow:visible}
+#drawer #ovPresets{flex:1 1 360px;flex-wrap:nowrap;gap:5px;border:0;padding:0;margin:0;min-width:0}
+#drawer .dw-tgt>.grow{display:none}
+#drawer .dw-chain{margin-left:auto;white-space:nowrap}
+#drawer .ov-choice{position:relative;min-width:90px;max-width:200px;flex:1 1 120px;font-size:var(--fs-sm)}
+#drawer .ov-choice>summary{cursor:pointer;border:1px solid var(--line);border-radius:6px;background:var(--inset);padding:5px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;list-style:none}
+#drawer .ov-choice>summary::after{content:' ▾';float:right}
+#drawer .ov-choice[open]{z-index:20}
+#drawer .ov-choice-options{position:absolute;top:100%;left:0;display:flex;flex-direction:column;gap:3px;min-width:200px;max-width:min(320px,70vw);max-height:240px;overflow:auto;padding:6px;margin:3px 0 0;background:var(--bar);border:1px solid var(--line);border-radius:7px;box-shadow:0 5px 18px #0003;cursor:default}
+#drawer .ov-choice-options>.ov-group{display:flex;flex:0 0 auto;width:100%}
+#drawer .ov-choice-options .ov-group-actions{display:flex;position:static;opacity:1}
+#drawer .ov-choice-options [data-t],#drawer .ov-choice-options [data-opselect]{flex:1;max-width:none;text-align:left}
+#drawer .ov-choice-options>button{text-align:left}
+#drawer #dwSeg{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:0;max-width:100%}
+#drawer #dwFavoriteDivider{padding:0 7px;color:var(--sub)}
+.ov-run-status{flex:1 1 220px;min-width:0;font-size:12px;line-height:1.5;color:var(--fg);overflow-wrap:anywhere}
+.ov-task-runbar{flex-wrap:wrap}
+.ov-choice-summary{flex:0 0 auto;font-size:11px;color:var(--fg2)}
+.ov-choice-summary[hidden]{display:none}
+.ov-management-head{flex-wrap:wrap}
+#ovManageStatus{flex:1 0 100%}
+#ovWorkHistory{padding:7px 10px;border-bottom:1px solid var(--line);font-size:12px;flex:none}
+#ovWorkHistory summary{cursor:pointer;font-weight:600}
+#ovWorkHistory ol{max-height:min(160px,24vh);overflow:auto;padding-left:20px;margin:6px 0}
+#ovWorkHistory li{padding:4px 0;overflow-wrap:anywhere}
+#ovWorkHistory time{color:var(--sub);font-size:11px}
+@media(max-width:599px){
+  #ovManagement #bsegs{max-height:120px;overflow:auto}
+  #ovManagement #ovWorkHistory[open]{max-height:150px;overflow:auto}
+  #ovManagement #ovWorkHistory p{margin:5px 0}
+  #ovManagement #ovWorkHistory ol{max-height:85px}
+  #ovManagement .ov-management-head{gap:6px}
+  #ovManagement .ov-management-head>.muted{display:none}
+}
+#drawer #dwWorkFavorites{min-width:28px;padding:5px 7px}
+@media(max-width:650px){#drawer #dwSeg button{padding:5px 6px}#drawer #dwSeg .c{font-size:9px}#drawer #ovPresets{flex-basis:310px}#drawer #ovPresetNew{font-size:10px}}

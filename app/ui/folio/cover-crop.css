@@ -1,0 +1,24 @@
+#cropScrim{position:fixed;inset:0;z-index:12;background:var(--backdrop)}
+#cropSheet{position:fixed;inset:8px;z-index:13;border:1px solid var(--gold-line);border-radius:12px;background:var(--bar);color:var(--row);padding:12px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 30px var(--shadow)}
+#cropSheet[hidden],#cropScrim[hidden]{display:none!important}
+.crop-head{display:flex;align-items:center;gap:10px;flex-shrink:0;font-size:13px}
+.crop-head small{color:var(--row-sub);font-size:11px}
+.crop-preview{display:flex;align-items:center;justify-content:center;gap:24px;flex:1;min-height:0;overflow:hidden}
+#cropStage{height:100%;max-height:300px;aspect-ratio:1000/1420;max-width:48%;position:relative;flex-shrink:0;border:1px solid var(--gold-line);background:white;border-radius:5px;overflow:hidden;cursor:grab;touch-action:none}
+#cropStage:active{cursor:grabbing}
+#cropStage canvas{display:block;width:100%;height:100%;touch-action:none}
+.crop-card{max-width:280px;min-width:0;display:flex;align-items:center;gap:12px}
+#cropThumb{width:84px;height:auto;aspect-ratio:1000/1420;border-radius:6px;border:1px solid var(--ctl);flex-shrink:0}
+.crop-meta{min-width:0;line-height:1.5}.crop-meta small{font-size:10px;color:var(--gold)}
+#cropTitle{font-size:15px;color:var(--title);font-weight:700;word-break:keep-all;overflow-wrap:anywhere}
+#cropArtist,#cropInfo{font-size:11px;color:var(--row-sub);word-break:keep-all;overflow-wrap:anywhere}
+.crop-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11px;flex-shrink:0}
+.crop-controls input{flex:1;min-width:70px;accent-color:var(--gold)}
+.crop-stretch{display:flex;align-items:center;gap:8px;font-size:11px;flex-shrink:0;flex-wrap:wrap}
+.crop-stretch input{flex:1;min-width:65px;width:100px;accent-color:var(--gold)}
+.crop-stretch output{min-width:32px;color:var(--row-sub)}
+#cropSheet button{border:1px solid var(--ctl);border-radius:6px;padding:6px 10px;font-size:12px;color:var(--row)}
+#cropSheet button.pri{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.crop-foot{display:flex;align-items:center;gap:10px;flex-shrink:0}
+#cropStatus{flex:1;font-size:11px;color:var(--row-sub);overflow-wrap:anywhere}
+@media(max-width:520px){.crop-preview{gap:12px}.crop-card{flex-direction:column;align-items:flex-start;gap:6px}#cropThumb{width:58px}#cropTitle{font-size:12px}.crop-head small{font-size:10px}}

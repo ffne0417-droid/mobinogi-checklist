@@ -1,0 +1,17 @@
+import {fileURLToPath} from 'node:url';
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';
+const source=fs.readFileSync(fileURLToPath(new URL('../app/ui/js/overlay-observation.js',import.meta.url)),'utf8');
+const context=vm.createContext({Date});vm.runInContext(source.split('(()=>{')[0],context);
+const status=q=>context.overlayRunStatus(q,1100);
+assert.match(status({running:false,stopReason:'user'}),/사용자 정지/);
+assert.match(status({running:false,lastError:{code:'unknown_modal'}}),/오류로 중단.*자동 재개 안 함/);
+assert.match(status({running:true,connectorBreak:{paused:true,remainingRestSeconds:90}}),/2분 후 재개 예정/);
+assert.match(status({running:true,connectorBreak:{paused:true}}),/자동 휴식 중/);
+assert(!status({running:false,connectorBreak:{paused:true}}).includes('휴식 중'));
+const items=[{id:'rice',name:'밥',status:'waiting',log:[{t:1000,msg:'완료 대기 — 180초 남음'}]}];
+assert.match(status({running:true,current:'rice',items}),/약 2분/);
+assert.match(status({running:false,items}),/실행 정지/);
+assert.match(status({running:true,hold:{kind:'music'}}),/연주/);
+assert.equal(context.overlayEvents({items:[{name:'그룹',items}]}).length,1);
+assert.match(status({running:false,items:[{log:[{t:1000,msg:'진척 없이 대기 상한(30분)에 닿음'}]}]}),/대기 상한.*자동 재개 안 함/);
+console.log('PASS waiting/stopped/error/hold/rest states, countdown, nested logs; no game requests');
